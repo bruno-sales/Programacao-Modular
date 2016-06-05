@@ -8,13 +8,17 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * 
+ * Classe responsável por descompactar arquivos zip
+ */
 public class Unzipper {
 
     List<String> fileList;
 		      
     /**
      * Metodo para realizar o unzip
-     * @param arquivoZip Arquivo em formato Zip
+     * @param arquivoZip Caminho+arquivo em formato Zip
      * @param caminhoDestino Diretorio onde o arquivo será salvo
      */
     public void unzipFile(String arquivoZip, String caminhoDestino){
