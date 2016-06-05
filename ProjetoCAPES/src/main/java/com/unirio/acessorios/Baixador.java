@@ -15,7 +15,7 @@ import java.nio.channels.ReadableByteChannel;
  */
 public class Baixador {
 
-    private static final String DIRETORIO = "Xmls";
+    private static final String DIRETORIO = "xmls";
 
     /**
      *

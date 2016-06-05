@@ -74,20 +74,14 @@ public class Controlador {
             
             doc.getDocumentElement().normalize();
 
-            String nome = doc.getDocumentElement().getNodeName();
-            System.out.println("Root element :" + nome);
-
             NodeList nList = doc.getElementsByTagName("programa");
-            System.out.println("----------------------------");
-
+            
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
-                System.out.println("\nCurrent Element :"
-                        + nNode.getNodeName());
+                
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
                     Element eElement = (Element) nNode;
-
+                    
                     nomePrograma = LeitorXml.getStringAttribute(eElement, "nome");
                 }
             }
