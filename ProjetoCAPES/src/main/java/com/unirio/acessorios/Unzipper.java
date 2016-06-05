@@ -55,6 +55,12 @@ public class Unzipper {
                 ze = zis.getNextEntry();
             }
 
+            //Deletar zip
+            File toDelete = new File(caminhoDestino + File.separator + arquivoZip);
+            
+            if(toDelete.exists())
+                 toDelete.delete();
+            
             zis.closeEntry();
             zis.close();
             contador++;
