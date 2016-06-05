@@ -66,7 +66,7 @@ public class Controlador {
         String nomePrograma = "";
 
         try {
-            File inputFile = new File("Xmls/programas.xml");
+            File inputFile = new File("xmls/programas.xml");
 
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();            
