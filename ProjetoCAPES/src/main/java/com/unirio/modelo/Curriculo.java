@@ -11,7 +11,7 @@ public @Data class Curriculo {
     private int artigosRevistasB3;
     private int artigosRevistasB4;
     private int artigosRevistasC;
-    private int artigosEventosNC;
+    private int artigosRevistasNC;
     private int artigosEventosA1;
     private int artigosEventosA2;
     private int artigosEventosB1;
@@ -30,7 +30,7 @@ public @Data class Curriculo {
     private int orientacoesMestradoEmAndamento;
     private int orientacoesGraduacaoEmAndamento;
 
-    public Curriculo(int artigosRevistasA1, int artigosRevistasA2, int artigosRevistasB1, int artigosRevistasB2, int artigosRevistasB3, int artigosRevistasB4, int artigosRevistasC, int artigosEventosNC, int artigosEventosA1, int artigosEventosA2, int artigosEventosB1, int artigosEventosB2, int artigosEventosB3, int artigosEventosB4, int artigosEventosC, int participacoesBancasDoutorado, int participacoesBancasMestrado, int participacoesBancasGraduacao, int orientacoesDoutoradoConcluidas, int orientacoesMestradoConcluidas, int orientacoesGraduacaoConcluidas, int orientacoesDoutoradoEmAndamento, int orientacoesMestradoEmAndamento, int orientacoesGraduacaoEmAndamento) {
+    public Curriculo(int artigosRevistasA1, int artigosRevistasA2, int artigosRevistasB1, int artigosRevistasB2, int artigosRevistasB3, int artigosRevistasB4, int artigosRevistasC, int artigosRevistasNC, int artigosEventosA1, int artigosEventosA2, int artigosEventosB1, int artigosEventosB2, int artigosEventosB3, int artigosEventosB4, int artigosEventosC, int artigosEventosNC, int participacoesBancasDoutorado, int participacoesBancasMestrado, int participacoesBancasGraduacao, int orientacoesDoutoradoConcluidas, int orientacoesMestradoConcluidas, int orientacoesGraduacaoConcluidas, int orientacoesDoutoradoEmAndamento, int orientacoesMestradoEmAndamento, int orientacoesGraduacaoEmAndamento) {
         this.artigosRevistasA1 = artigosRevistasA1;
         this.artigosRevistasA2 = artigosRevistasA2;
         this.artigosRevistasB1 = artigosRevistasB1;
@@ -38,7 +38,7 @@ public @Data class Curriculo {
         this.artigosRevistasB3 = artigosRevistasB3;
         this.artigosRevistasB4 = artigosRevistasB4;
         this.artigosRevistasC = artigosRevistasC;
-        this.artigosEventosNC = artigosEventosNC;
+        this.artigosRevistasNC = artigosRevistasNC;
         this.artigosEventosA1 = artigosEventosA1;
         this.artigosEventosA2 = artigosEventosA2;
         this.artigosEventosB1 = artigosEventosB1;
@@ -46,6 +46,7 @@ public @Data class Curriculo {
         this.artigosEventosB3 = artigosEventosB3;
         this.artigosEventosB4 = artigosEventosB4;
         this.artigosEventosC = artigosEventosC;
+        this.artigosEventosNC = artigosEventosNC;
         this.participacoesBancasDoutorado = participacoesBancasDoutorado;
         this.participacoesBancasMestrado = participacoesBancasMestrado;
         this.participacoesBancasGraduacao = participacoesBancasGraduacao;
@@ -56,6 +57,9 @@ public @Data class Curriculo {
         this.orientacoesMestradoEmAndamento = orientacoesMestradoEmAndamento;
         this.orientacoesGraduacaoEmAndamento = orientacoesGraduacaoEmAndamento;
     }
+    
+    
+
     
     
     
