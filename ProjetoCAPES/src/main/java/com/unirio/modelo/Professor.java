@@ -7,10 +7,9 @@ public @Data class Professor {
     private String codigo;
     private Curriculo curriculo;
 
-    public Professor(String nome, String codigo, Curriculo curriculo) {
+    public Professor(String nome, String codigo) {
         this.nome = nome;
         this.codigo = codigo;
-        this.curriculo = curriculo;
     }
     
    
