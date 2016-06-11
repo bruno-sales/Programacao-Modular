@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import org.w3c.dom.Element;
 /**
  *
- * Esta classe deverá ser a responsavel por baixar o zip e fazer o unzip
+ * Classe  responsavel por baixar arquivos da web 
  */
 public class Baixador {
 
@@ -100,6 +100,7 @@ public class Baixador {
                 try {
                     BaixarArquivo(nome, url);
                     Unzipper.unzipFile(nome, codProfessor, "xmls");
+                    
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {

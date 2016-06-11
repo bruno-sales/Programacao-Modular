@@ -7,7 +7,6 @@ import com.unirio.modelo.LeitorPrograma;
 import com.unirio.modelo.LinhaPesquisa;
 import com.unirio.modelo.Professor;
 import com.unirio.modelo.Programa;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,9 +16,13 @@ public class Controlador {
 
     public static void main(String[] args) {
 
+        System.out.println("Favor aguardar. Arquivos sendo baixados....");
         Baixador.baixarPrimeiroArquivo();
         Baixador.baixarSegundoArquivo();
         Baixador.baixarTerceiroArquivo();
+        System.out.println("Download de arquivos terminado");
+        
+        
         List<Programa> programas = LeitorPrograma.recuperaDadosPrograma();
         for(Programa p : programas){
             
@@ -28,8 +31,12 @@ public class Controlador {
                 
                 List<Professor> professores = LeitorProfessor.recuperaDadosProfessor();
                 for(Professor professor : professores){
-                
-                    System.out.println("Programa: " + p.getNome() + "  Linha de Pesquisa: " + linhaPesquisa.getNome() + " Professor: " + professor.getNome() + " .");
+                    
+                    String nomePrograma = p.getNome() ;
+                    String nomePesquisa = linhaPesquisa.getNome();
+                    String nomeProfessor= professor.getNome();
+                    
+                    System.out.println("Programa: " + nomePrograma + "  Linha de Pesquisa: " + nomePesquisa + " Professor: " + nomeProfessor + " .");
                 
                 }
                 

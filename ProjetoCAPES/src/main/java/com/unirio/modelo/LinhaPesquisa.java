@@ -5,26 +5,20 @@
  */
 package com.unirio.modelo;
 
-import com.unirio.acessorios.LeitorXml;
-import com.unirio.acessorios.RecuperaXml;
-import java.util.ArrayList;
-import java.util.List;
-import org.w3c.dom.Element;
 import lombok.Data;
-
+import lombok.Getter;
 
 /**
  *
  * @author Caroline
  */
-public @Data class LinhaPesquisa {
-    
-        private String nome;
+public @Data
+class LinhaPesquisa {
+
+    private @Getter String nome;
 
     public LinhaPesquisa(String nome) {
         this.nome = nome;
     }
-        
-        
-    
+
 }

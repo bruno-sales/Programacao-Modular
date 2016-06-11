@@ -27,9 +27,9 @@ public class Unzipper {
         try {
 
             //criar pasta para guardar zip, se não existir
-            File folder = new File(caminhoDestino);
-            if (!folder.exists()) {
-                folder.mkdir();
+            File diretorio = new File(caminhoDestino);
+            if (!diretorio.exists()) {
+                diretorio.mkdir();
             }
 
             //Obtem conteudo do zip
@@ -42,7 +42,7 @@ public class Unzipper {
             while (ze != null) {
 
                 String fileName = ze.getName();
-                File newFile = new File(caminhoDestino + File.separator + contador+" - "+nomeArquivoDescompactado+ fileName);
+                File newFile = new File(caminhoDestino + File.separator + contador + " - " + nomeArquivoDescompactado + fileName);
 
                 FileOutputStream fos = new FileOutputStream(newFile);
 
@@ -55,17 +55,35 @@ public class Unzipper {
                 ze = zis.getNextEntry();
             }
 
-            //Deletar zip
-            File toDelete = new File(caminhoDestino + File.separator + arquivoZip);
-            
-            if(toDelete.exists())
-                 toDelete.delete();
-            
             zis.closeEntry();
             zis.close();
             contador++;
-            
+
         } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Deletar arquivos zip
+     * @param caminho: Caminho para a pasta 
+     */
+    public static void deleteZipFiles(String caminho) {
+
+        // Entrar na pasta
+        File folder = new File(caminho);
+
+        try {
+            File[] listaArquivos = folder.listFiles();
+            
+            // Varrer arquivos
+            for (File f : listaArquivos) {
+                //Se terminar com .zip, deleta
+                if (f.getName().endsWith(".zip")) {
+                    f.delete();
+                }
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

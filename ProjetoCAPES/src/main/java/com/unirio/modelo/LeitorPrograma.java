@@ -5,22 +5,10 @@
  */
 package com.unirio.modelo;
 
-import static com.unirio.acessorios.Baixador.BaixarArquivo;
 import com.unirio.acessorios.LeitorXml;
 import com.unirio.acessorios.RecuperaXml;
-import com.unirio.controlador.Controlador;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.w3c.dom.Element;
 
 /**

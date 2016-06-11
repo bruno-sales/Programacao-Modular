@@ -1,9 +1,10 @@
 package com.unirio.modelo;
 
 import lombok.Data;
+import lombok.Getter;
 public @Data class Professor {
 
-    private String nome;
+    private @Getter String nome;
     private String codigo;
     private Curriculo curriculo;
 
