@@ -10,5 +10,9 @@ package com.unirio.modelo;
  * @author Caroline
  */
 public class LeitorCurriculo {
+
+    public static Curriculo recuperaDadosCurriculo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

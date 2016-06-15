@@ -42,8 +42,9 @@ public class Unzipper {
             while (ze != null) {
 
                 String fileName = ze.getName();
-                File newFile = new File(caminhoDestino + File.separator + contador + " - " + nomeArquivoDescompactado + fileName);
-
+                //File newFile = new File(caminhoDestino + File.separator + contador + " - " + nomeArquivoDescompactado + fileName);
+                
+                File newFile = new File(caminhoDestino + File.separator + nomeArquivoDescompactado + fileName);
                 FileOutputStream fos = new FileOutputStream(newFile);
 
                 int len;

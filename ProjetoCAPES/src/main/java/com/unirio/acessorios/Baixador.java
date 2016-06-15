@@ -45,6 +45,20 @@ public class Baixador {
         }
     }
     
+     public static void baixarQualis() {
+        String url = "https://s3.amazonaws.com/posgraduacao/qualis.xml";
+        String nome = "qualis.xml";
+
+        try {
+            BaixarArquivo(nome, url);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+     
      public static void baixarPrimeiroArquivo() {
         String url = "https://s3.amazonaws.com/posgraduacao/programas.xml";
         String nome = "programas.xml";

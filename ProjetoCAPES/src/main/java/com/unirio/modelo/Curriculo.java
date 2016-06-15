@@ -57,6 +57,13 @@ public @Data class Curriculo {
         this.orientacoesMestradoEmAndamento = orientacoesMestradoEmAndamento;
         this.orientacoesGraduacaoEmAndamento = orientacoesGraduacaoEmAndamento;
     }
+
+    public Curriculo() {
+    }
+
+    public void qualificaArtigos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 
