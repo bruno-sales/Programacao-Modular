@@ -19,10 +19,10 @@ public class Controlador {
     public static void baixaArquivos()
     {        
         System.out.println("Favor aguardar. Arquivos sendo baixados....");
+        Baixador.baixarQualis();
         Baixador.baixarPrimeiroArquivo();
         Baixador.baixarSegundoArquivo();
         Baixador.baixarTerceiroArquivo();
-        Baixador.baixarQualis();
         System.out.println("Download de arquivos terminado");
     }
     
@@ -37,9 +37,15 @@ public class Controlador {
                 List<Professor> professores = LeitorProfessor.recuperaDadosProfessor();
                 for(Professor professor : professores){
                     
-                    Curriculo curriculo = LeitorCurriculo.recuperaDadosCurriculo();
-                    curriculo.qualificaArtigos();
-                    professor.setCurriculo(curriculo);
+                    String codProf = professor.getCodigo();
+                    
+                    Curriculo curriculo = LeitorCurriculo.recuperaDadosCurriculo(codProf);
+                    
+                    System.out.println("Professor: "+professor.getNome());
+                    curriculo.escrever();
+                    System.out.println("========================================================= ");
+                    //curriculo.qualificaArtigos();
+                    //professor.setCurriculo(curriculo);
                     
                    /* String nomePrograma = p.getNome() ;
                     String nomePesquisa = linhaPesquisa.getNome();

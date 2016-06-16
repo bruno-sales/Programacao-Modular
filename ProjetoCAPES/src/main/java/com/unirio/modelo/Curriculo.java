@@ -65,7 +65,18 @@ public @Data class Curriculo {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
+    public void escrever()
+    {
+        System.out.println("participacoes Bancas Doutorado: " + participacoesBancasDoutorado);
+        System.out.println("participacoes Bancas Mestrado: " + participacoesBancasMestrado);
+        System.out.println("participacoes Bancas Graduacao: " + participacoesBancasGraduacao);
+        System.out.println("orientacoes Doutorado Concluidas: " + orientacoesDoutoradoConcluidas);
+        System.out.println("orientacoes Mestrado Concluidas: " + orientacoesMestradoConcluidas);
+        System.out.println("orientacoes Graduacao Concluidas: " + orientacoesGraduacaoConcluidas);
+        System.out.println("orientacoes Doutorado Em Andamento: " + orientacoesDoutoradoEmAndamento);
+        System.out.println("orientacoes Mestrado Em Andamento: " + orientacoesMestradoEmAndamento);
+        System.out.println("orientacoes Graduacao Em Andamento: " + orientacoesGraduacaoEmAndamento);
+    }
 
     
     
