@@ -38,27 +38,28 @@ public class Unzipper {
             ZipEntry ze = zis.getNextEntry();
 
             //Para o caso em que o zip tenha diversos arquivos   
-            int contador = 0;
             while (ze != null) {
 
                 String fileName = ze.getName();
-                //File newFile = new File(caminhoDestino + File.separator + contador + " - " + nomeArquivoDescompactado + fileName);
                 
                 File newFile = new File(caminhoDestino + File.separator + nomeArquivoDescompactado + fileName);
-                FileOutputStream fos = new FileOutputStream(newFile);
 
-                int len;
-                while ((len = zis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
+                //Só fazer salvar arquivo unzipped se ele não já existir
+                if (newFile.exists() == false) {
+                    FileOutputStream fos = new FileOutputStream(newFile);
+
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+
+                    fos.close();
                 }
-
-                fos.close();
                 ze = zis.getNextEntry();
             }
 
             zis.closeEntry();
             zis.close();
-            contador++;
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -67,7 +68,8 @@ public class Unzipper {
 
     /**
      * Deletar arquivos zip
-     * @param caminho: Caminho para a pasta 
+     *
+     * @param caminho: Caminho para a pasta
      */
     public static void deleteZipFiles(String caminho) {
 
@@ -76,7 +78,7 @@ public class Unzipper {
 
         try {
             File[] listaArquivos = folder.listFiles();
-            
+
             // Varrer arquivos
             for (File f : listaArquivos) {
                 //Se terminar com .zip, deleta
