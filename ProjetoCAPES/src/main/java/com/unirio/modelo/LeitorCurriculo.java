@@ -32,6 +32,7 @@ public class LeitorCurriculo {
 
     private static final String ARTIGOPUBLICADO = "ARTIGO-PUBLICADO";
     private static final String TITULODOPERIODICOOUREVISTA = "TITULO-DO-PERIODICO-OU-REVISTA";
+    private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";
 
     public static Curriculo recuperaDadosCurriculo(String codProfessor) {
 
@@ -78,11 +79,10 @@ public class LeitorCurriculo {
         int artigosEventosC = 0;
         int artigosEventosNC = 0;
 
-        List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
-
+        //List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
+        
+        List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", DETALHAMENTODOARTIGO);
         for (Element artigo : artigos) {
-
-            NodeList algo = artigo.getElementsByTagName("DETALHAMENTO-DO-ARTIGO");
 
             String tituloEvento = artigo.getAttribute(TITULODOPERIODICOOUREVISTA);
 
