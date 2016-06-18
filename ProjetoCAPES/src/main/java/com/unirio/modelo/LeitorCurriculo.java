@@ -91,7 +91,7 @@ public class LeitorCurriculo {
             for (Element qualis : qualisList) {
                 String nomeQualis = qualis.getAttribute("regex");
 
-                if (tituloEvento.toLowerCase() == nomeQualis.toLowerCase()) {
+                if (tituloEvento.toLowerCase().equals(nomeQualis.toLowerCase())) {
                     String classe = qualis.getAttribute("class");
                     String tipo = qualis.getAttribute("type");
 
