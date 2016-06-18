@@ -1,9 +1,10 @@
 package com.unirio.modelo;
+
 import lombok.Data;
 
+public @Data
+class Curriculo {
 
-public @Data class Curriculo {
-    
     private int artigosRevistasA1;
     private int artigosRevistasA2;
     private int artigosRevistasB1;
@@ -61,12 +62,70 @@ public @Data class Curriculo {
     public Curriculo() {
     }
 
-    public void qualificaArtigos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void qualificaArtigos(String tipo, String classe) {
+        
+        if (tipo.equals("Periódico")) {
+            switch (classe) {
+                case "A1":
+                    artigosRevistasA1++;
+                    break;
+                case "A2":
+                    artigosRevistasA2++;
+                    break;
+                case "B1":
+                    artigosRevistasB1++;
+                    break;
+                case "B2":
+                    artigosRevistasB2++;
+                    break;
+                case "B3":
+                    artigosRevistasB3++;
+                    break;
+                case "B4":
+                    artigosRevistasB4++;
+                    break;
+                case "C":
+                    artigosRevistasC++;
+                    break;
+                case "NC":
+                    artigosRevistasNC++;
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (classe) {
+                case "A1":
+                    artigosEventosA1++;
+                    break;
+                case "A2":
+                    artigosEventosA2++;
+                    break;
+                case "B1":
+                    artigosEventosB1++;
+                    break;
+                case "B2":
+                    artigosEventosB2++;
+                    break;
+                case "B3":
+                    artigosEventosB3++;
+                    break;
+                case "B4":
+                    artigosEventosB4++;
+                    break;
+                case "C":
+                    artigosEventosC++;
+                    break;
+                case "NC":
+                    artigosEventosNC++;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
-    
-    public void escrever()
-    {
+
+    public void escrever() {
         System.out.println("participacoes Bancas Doutorado: " + participacoesBancasDoutorado);
         System.out.println("participacoes Bancas Mestrado: " + participacoesBancasMestrado);
         System.out.println("participacoes Bancas Graduacao: " + participacoesBancasGraduacao);
@@ -94,7 +153,4 @@ public @Data class Curriculo {
         System.out.println("Evento NC: " + artigosEventosNC);
     }
 
-    
-    
-    
 }
