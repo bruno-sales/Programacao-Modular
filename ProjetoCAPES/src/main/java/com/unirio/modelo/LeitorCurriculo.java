@@ -32,6 +32,11 @@ public class LeitorCurriculo {
 
     private static final String TITULODOPERIODICOOUREVISTA = "TITULO-DO-PERIODICO-OU-REVISTA";
     private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";
+    private static final String DETALHAMENTODOTRABALHO = "DETALHAMENTO-DO-TRABALHO";
+    private static final String TITULODOSANAISOUPROCEEDINGS  = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
+
+       
+
 
     public static Curriculo recuperaDadosCurriculo(String codProfessor) {
 
@@ -65,14 +70,33 @@ public class LeitorCurriculo {
         List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", DETALHAMENTODOARTIGO);
         for (Element artigo : artigos) {
 
-            String tituloEvento = artigo.getAttribute(TITULODOPERIODICOOUREVISTA);
+            String tituloAnais = artigo.getAttribute(TITULODOPERIODICOOUREVISTA);
 
             List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
 
             for (Element qualis : qualisList) {
                 String nomeQualis = qualis.getAttribute("regex");
 
-                if (tituloEvento.toLowerCase().equals(nomeQualis.toLowerCase())) {
+                if (tituloAnais.toLowerCase().matches(".*" + nomeQualis.toLowerCase() + ".*")) {
+                    String classe = qualis.getAttribute("class");
+                    String tipo = qualis.getAttribute("type");
+
+                    curriculo.qualificaArtigos(tipo, classe);
+                }
+            }
+        }
+        
+        List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", DETALHAMENTODOTRABALHO);
+        for (Element evento : eventos) {
+
+            String tituloEvento = evento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
+
+            List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
+
+            for (Element qualis : qualisList) {
+                String nomeQualis = qualis.getAttribute("regex");
+
+                if (tituloEvento.toLowerCase().matches(".*" + nomeQualis.toLowerCase() + ".*")) {
                     String classe = qualis.getAttribute("class");
                     String tipo = qualis.getAttribute("type");
 

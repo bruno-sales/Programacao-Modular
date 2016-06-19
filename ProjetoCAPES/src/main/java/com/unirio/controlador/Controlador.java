@@ -12,12 +12,11 @@ import com.unirio.modelo.Programa;
 import java.util.List;
 
 /**
- * Classe de controler. 
+ * Classe de controler.
  */
 public class Controlador {
 
-    public static void baixaArquivos()
-    {        
+    public static void baixaArquivos() {
         System.out.println("Favor aguardar. Arquivos sendo baixados....");
         Baixador.baixarQualis();
         Baixador.baixarPrimeiroArquivo();
@@ -25,43 +24,42 @@ public class Controlador {
         Baixador.baixarTerceiroArquivo();
         System.out.println("Download de arquivos terminado");
     }
-    
-    public static void carregaDados()
-    {                
+
+    public static List<Programa> carregaDados() {
         List<Programa> programas = LeitorPrograma.recuperaDadosPrograma();
-        for(Programa p : programas){
-            
+        for (Programa p : programas) {
+
             List<LinhaPesquisa> linhasPesquisa = LeitorLinhaPesquisa.recuperaDadosLinhaPesquisa(p);
-            for(LinhaPesquisa linhaPesquisa : linhasPesquisa){
-                
-                List<Professor> professores = LeitorProfessor.recuperaDadosProfessor();
-                for(Professor professor : professores){
-                    
+            p.setLinhasPesquisa(linhasPesquisa);
+
+            for (LinhaPesquisa linhaPesquisa : linhasPesquisa) {
+
+                List<Professor> professores = LeitorProfessor.recuperaDadosProfessor(linhaPesquisa.getNome());
+                linhaPesquisa.setProfessores(professores);
+
+                for (Professor professor : professores) {
+
                     String codProf = professor.getCodigo();
-                    
+
                     Curriculo curriculo = LeitorCurriculo.recuperaDadosCurriculo(codProf);
-                    
-                    System.out.println("Professor: "+professor.getNome());
-                    curriculo.escrever();
-                    System.out.println("========================================================= ");
-                    //curriculo.qualificaArtigos();
-                    //professor.setCurriculo(curriculo);
-                    
-                   /* String nomePrograma = p.getNome() ;
-                    String nomePesquisa = linhaPesquisa.getNome();
-                    String nomeProfessor= professor.getNome();
-                    
-                    System.out.println("Programa: " + nomePrograma + "  Linha de Pesquisa: " + nomePesquisa + " Professor: " + nomeProfessor + " .");*/
-                
+                    professor.setCurriculo(curriculo);
+
                 }
-                
+
             }
 
         }
+        return programas;
     }
 
-    static void geraRelatorio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    static void geraRelatorio(List<Programa> programas) {
+        for (Programa p : programas) {
+            for (LinhaPesquisa lp : p.getLinhasPesquisa()) {
+                for (Professor prof : lp.getProfessores()) {
+                    prof.getCurriculo().escrever();
+                }
+            }
+        }
     }
-  
+
 }

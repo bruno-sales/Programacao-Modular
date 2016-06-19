@@ -6,7 +6,7 @@ import lombok.Setter;
 public @Data class Professor {
 
     private @Getter String nome;
-    private String codigo;
+    private @Getter @Setter String codigo;
     private @Setter Curriculo curriculo;
 
     public Professor(String nome, String codigo) {

@@ -5,8 +5,10 @@
  */
 package com.unirio.modelo;
 
+import java.util.List;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -16,6 +18,7 @@ public @Data
 class LinhaPesquisa {
 
     private @Getter String nome;
+    private @Getter @Setter List<Professor> professores;
 
     public LinhaPesquisa(String nome) {
         this.nome = nome;

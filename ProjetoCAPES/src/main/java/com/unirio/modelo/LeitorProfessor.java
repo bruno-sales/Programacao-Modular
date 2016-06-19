@@ -10,29 +10,51 @@ import com.unirio.acessorios.RecuperaXml;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
  * @author Caroline
  */
 public class LeitorProfessor {
-    
-    public static List<Professor> recuperaDadosProfessor() {
-        
+
+    public static List<Professor> recuperaDadosProfessor(String linhaPesquisa) {
+
         List<Professor> listaProfessores = new ArrayList();
 
-        List<Element> professores = RecuperaXml.getElementoXml("xmls/contents.xml" , "professor");
+        List<Element> linhasPesquisa = RecuperaXml.getElementoXml("xmls/contents.xml", "linha");
 
-        for (Element professor : professores) {
-            Professor p = new Professor(LeitorXml.getStringAttribute(professor, "nome"),LeitorXml.getStringAttribute(professor, "codigo"));
-            listaProfessores.add(p);
+        for (Element lp : linhasPesquisa) {
+            String nomeLinhaPesquisa = lp.getAttribute("nome");
+            if (nomeLinhaPesquisa.equals(linhaPesquisa)) {
+                List<Node> professores = new ArrayList();
+                
+                Node professor = lp.getFirstChild();
+                professores.add(professor);
+                
+                while(professor.getNextSibling() != null){
+                    professor = professor.getNextSibling();
+                    professores.add(professor);
+                }
+                
+                professor = lp.getLastChild();
+                professores.add(professor);
+                
+                for (Node p : professores) {
+                    if(p.getNodeType() == Node.ELEMENT_NODE)
+                    {
+                        Element e = (Element)p;
+                        Professor prof = new Professor(e.getAttribute("nome"), e.getAttribute("codigo"));
+                        listaProfessores.add(prof);
+                    }
+                }
+
+            }
         }
-        
+
         return listaProfessores;
-        
-        
 
     }
 
-    
 }
