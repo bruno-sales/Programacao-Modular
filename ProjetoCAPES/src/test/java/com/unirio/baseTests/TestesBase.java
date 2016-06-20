@@ -42,10 +42,24 @@ public class TestesBase {
     }
 
     @Test
-    public void TestPrograma() {
+    public void TestQuantidadeLinhasPesquisa() {
+ 
         Programa programaTeste = new Programa("PPGI-UNIRIO");
         assertEquals(3, (LeitorLinhaPesquisa.recuperaDadosLinhaPesquisa(programaTeste)).size());
-        assertEquals("PPGI-UNIRIO", (LeitorPrograma.recuperaDadosPrograma("PPGI-UNIRIO")).getNome());
-        assertEquals(7, (LeitorProfessor.recuperaDadosProfessor("Sistemas de Apoio a Negócios")).size());
+ 
     }
-}
+
+    @Test
+    public void TestNomePrograma(){
+
+        assertEquals("PPGI-UNIRIO", (LeitorPrograma.recuperaDadosPrograma("PPGI-UNIRIO")).getNome());
+
+    }
+    
+    @Test
+    public void TestQauntidadeProfessoresLinhaPesquisa(){
+        
+        assertEquals(7, (LeitorProfessor.recuperaDadosProfessor("Sistemas de Apoio a Negócios")).size());
+    
+    }
+ }
