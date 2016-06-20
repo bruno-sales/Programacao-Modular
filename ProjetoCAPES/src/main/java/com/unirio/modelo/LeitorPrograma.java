@@ -7,7 +7,6 @@ package com.unirio.modelo;
 
 import com.unirio.acessorios.LeitorXml;
 import com.unirio.acessorios.RecuperaXml;
-import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
 

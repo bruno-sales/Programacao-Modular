@@ -8,11 +8,8 @@ package com.unirio.controlador;
 import com.unirio.modelo.Programa;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
