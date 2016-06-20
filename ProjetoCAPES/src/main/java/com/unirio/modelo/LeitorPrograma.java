@@ -17,18 +17,19 @@ import org.w3c.dom.Element;
  */
 public class LeitorPrograma {
 
-    public static List<Programa> recuperaDadosPrograma() {
+    public static Programa recuperaDadosPrograma(String nomePrograma) {
 
-        List<Programa> listaProgramas = new ArrayList();
+        Programa programaEscolhido = new Programa();
 
         List<Element> programas = RecuperaXml.getElementoXml("xmls/programas.xml", "programa");
 
         for (Element programa : programas) {
             Programa p = new Programa(LeitorXml.getStringAttribute(programa, "nome"));
-            listaProgramas.add(p);
+            if(p.getNome().equals(nomePrograma))
+                programaEscolhido = p;
         }
         
-        return listaProgramas;
+        return programaEscolhido;
         
         
 

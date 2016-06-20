@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Caroline
+ * Classe responsável por popular dados do currículo do professor e retornar objeto currículo preenchido.
  */
 public class LeitorCurriculo {
 
@@ -31,14 +31,17 @@ public class LeitorCurriculo {
     private static final String PARTICIPACAOEMBANCADEGRADUACAO = "PARTICIPACAO-EM-BANCA-DE-GRADUACAO";
 
     private static final String TITULODOPERIODICOOUREVISTA = "TITULO-DO-PERIODICO-OU-REVISTA";
-    private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";
-    private static final String DETALHAMENTODOTRABALHO = "DETALHAMENTO-DO-TRABALHO";
-    private static final String TITULODOSANAISOUPROCEEDINGS  = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
+    private static final String ANODOARTIGO = "ANO-DO-ARTIGO";
+    private static final String ARTIGOPUBLICADO = "ARTIGO-PUBLICADO";
+    
+    private static final String TRABALHOEMEVENTOS = "TRABALHO-EM-EVENTOS";
+        private static final String ANODOTRABALHO = "ANO-DO-TRABALHO";
 
-       
 
+    private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
 
-    public static Curriculo recuperaDadosCurriculo(String codProfessor) {
+    
+    public static Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
 
         Curriculo curriculo = new Curriculo();
 
@@ -66,42 +69,69 @@ public class LeitorCurriculo {
         curriculo.setParticipacoesBancasDoutorado(participacaoDoutoradoItens.size());
         curriculo.setParticipacoesBancasGraduacao(participacaoGraduacaoItens.size());
 
-        
-        List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", DETALHAMENTODOARTIGO);
+        List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
         for (Element artigo : artigos) {
+            
+            String tituloArtigoRevista = artigo.getAttribute(TITULODOPERIODICOOUREVISTA);
+            String stringAnoDoArtigo = artigo.getAttribute(ANODOARTIGO);
+            
+            if(!stringAnoDoArtigo.isEmpty()){
+                
+                int anoDoArtigo = Integer.parseInt(stringAnoDoArtigo);
+                if((anoDoArtigo>=anoInicio)&&(anoDoArtigo<=anoFim)){
 
-            String tituloAnais = artigo.getAttribute(TITULODOPERIODICOOUREVISTA);
+                    List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
+                    int countMatchesRevista = 0;
 
-            List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
+                    for (Element qualis : qualisList) {
+                        String padrao = qualis.getAttribute("regex");
+                        if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")) {
+                            countMatchesRevista++;
 
-            for (Element qualis : qualisList) {
-                String nomeQualis = qualis.getAttribute("regex");
+                            String classe = qualis.getAttribute("class");
+                            String tipo = qualis.getAttribute("type");
 
-                if (tituloAnais.toLowerCase().matches(".*" + nomeQualis.toLowerCase() + ".*")) {
-                    String classe = qualis.getAttribute("class");
-                    String tipo = qualis.getAttribute("type");
+                            curriculo.qualificaArtigos(tipo, classe);
+                        }
+                    }
+                    if (countMatchesRevista == 0) {
+                        System.out.println("Artigo em revista não encontrado: " + tituloArtigoRevista);
+                    }
 
-                    curriculo.qualificaArtigos(tipo, classe);
                 }
             }
+            
         }
-        
-        List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", DETALHAMENTODOTRABALHO);
+
+        List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", TRABALHOEMEVENTOS);
         for (Element evento : eventos) {
 
-            String tituloEvento = evento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
+            String tituloArtigoEventos = evento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
+            String stringAnoDoTrabalho = evento.getAttribute(ANODOTRABALHO);
 
-            List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
+            if(!stringAnoDoTrabalho.isEmpty()){
+                
+                int anoDoTrabalho = Integer.parseInt(stringAnoDoTrabalho);
+                if((anoDoTrabalho>=anoInicio)&&(anoDoTrabalho<=anoFim)){
+                    List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
+                    int countMatchesEventos = 0;
 
-            for (Element qualis : qualisList) {
-                String nomeQualis = qualis.getAttribute("regex");
+                    for (Element qualis : qualisList) {
+                        String padrao = qualis.getAttribute("regex");
 
-                if (tituloEvento.toLowerCase().matches(".*" + nomeQualis.toLowerCase() + ".*")) {
-                    String classe = qualis.getAttribute("class");
-                    String tipo = qualis.getAttribute("type");
+                        if (tituloArtigoEventos.matches("(?i:.*"+ padrao + ".*)")) {
+                            countMatchesEventos++;
+                            String classe = qualis.getAttribute("class");
+                            String tipo = qualis.getAttribute("type");
 
-                    curriculo.qualificaArtigos(tipo, classe);
+                            curriculo.qualificaArtigos(tipo, classe);
+                        }
+                    }
+                    if (countMatchesEventos == 0) {
+                        System.out.println("Artigo em evento não encontrado: " + tituloArtigoEventos);
+                    }
                 }
+                
             }
         }
 

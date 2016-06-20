@@ -13,5 +13,9 @@ public @Data class Programa {
     public Programa(String nome) {
         this.nome = nome;
     }
+    
+    public Programa(){
+    
+    }
 
 }

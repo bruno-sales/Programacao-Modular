@@ -11,7 +11,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class RecuperaXml {
-    
+    /* Recupera Elementos de um arquivo associados a tag tagName*/
     public static List<Element> getElementoXml(String nomeArquivo, String tagName) {
         List<Element> elementos = new ArrayList<>();
 

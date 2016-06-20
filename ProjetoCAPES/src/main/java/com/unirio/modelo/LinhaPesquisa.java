@@ -10,14 +10,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- *
- * @author Caroline
- */
 public @Data
 class LinhaPesquisa {
 
-    private @Getter String nome;
+    private @Getter @Setter String nome;
     private @Getter @Setter List<Professor> professores;
 
     public LinhaPesquisa(String nome) {

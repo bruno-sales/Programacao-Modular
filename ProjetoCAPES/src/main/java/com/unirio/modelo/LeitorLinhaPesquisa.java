@@ -13,7 +13,7 @@ import org.w3c.dom.Element;
 
 /**
  *
- * @author Caroline
+ * Classe responsável por popular linhas de pesquisa do programa informado
  */
 public class LeitorLinhaPesquisa {
     
