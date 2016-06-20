@@ -58,7 +58,6 @@ public class Controlador {
                 }
 
             }
-
         
         return p;
     }
@@ -67,9 +66,7 @@ public class Controlador {
     */
     static void geraRelatorio(Programa p) throws FileNotFoundException, UnsupportedEncodingException {
 
-        PrintWriter writer = new PrintWriter("relatorio.txt", "UTF-8");
-
-        
+        PrintWriter writer = new PrintWriter("relatorio.txt", "UTF-8");        
 
             int pRevistasA1 = 0;
             int pRevistasA2 = 0;
@@ -77,6 +74,7 @@ public class Controlador {
             int pRevistasB2 = 0;
             int pRevistasB3 = 0;
             int pRevistasB4 = 0;
+            int pRevistasB5 = 0;
             int pRevistasC = 0;
             int pRevistasNC = 0;
             int pEventosA1 = 0;
@@ -85,6 +83,7 @@ public class Controlador {
             int pEventosB2 = 0;
             int pEventosB3 = 0;
             int pEventosB4 = 0;
+            int pEventosB5 = 0;
             int pEventosC = 0;
             int pEventosNC = 0;
             int pParticipacaoDoutorado = 0;
@@ -105,6 +104,7 @@ public class Controlador {
                 int lpRevistasB2 = 0;
                 int lpRevistasB3 = 0;
                 int lpRevistasB4 = 0;
+                int lpRevistasB5 = 0;
                 int lpRevistasC = 0;
                 int lpRevistasNC = 0;
                 int lpEventosA1 = 0;
@@ -113,6 +113,7 @@ public class Controlador {
                 int lpEventosB2 = 0;
                 int lpEventosB3 = 0;
                 int lpEventosB4 = 0;
+                int lpEventosB5 = 0;
                 int lpEventosC = 0;
                 int lpEventosNC = 0;
                 int lpParticipacaoDoutorado = 0;
@@ -136,6 +137,7 @@ public class Controlador {
                     dadosProf.append("\t").append(curriculoProf.getArtigosRevistasB2());
                     dadosProf.append("\t").append(curriculoProf.getArtigosRevistasB3());
                     dadosProf.append("\t").append(curriculoProf.getArtigosRevistasB4());
+                    dadosProf.append("\t").append(curriculoProf.getArtigosRevistasB5());
                     dadosProf.append("\t").append(curriculoProf.getArtigosRevistasC());
                     dadosProf.append("\t").append(curriculoProf.getArtigosRevistasNC());
                     dadosProf.append("\t").append(curriculoProf.getArtigosEventosA1());
@@ -144,6 +146,7 @@ public class Controlador {
                     dadosProf.append("\t").append(curriculoProf.getArtigosEventosB2());
                     dadosProf.append("\t").append(curriculoProf.getArtigosEventosB3());
                     dadosProf.append("\t").append(curriculoProf.getArtigosEventosB4());
+                    dadosProf.append("\t").append(curriculoProf.getArtigosEventosB5());
                     dadosProf.append("\t").append(curriculoProf.getArtigosEventosC());
                     dadosProf.append("\t").append(curriculoProf.getArtigosEventosNC());
                     dadosProf.append("\t").append(curriculoProf.getParticipacoesBancasDoutorado());
@@ -163,6 +166,7 @@ public class Controlador {
                     lpRevistasB2 += curriculoProf.getArtigosRevistasB2();
                     lpRevistasB3 += curriculoProf.getArtigosRevistasB3();
                     lpRevistasB4 += curriculoProf.getArtigosRevistasB4();
+                    lpRevistasB5 += curriculoProf.getArtigosRevistasB5();
                     lpRevistasC += curriculoProf.getArtigosRevistasC();
                     lpRevistasNC += curriculoProf.getArtigosRevistasNC();
                     lpEventosA1 += curriculoProf.getArtigosEventosA1();
@@ -171,6 +175,7 @@ public class Controlador {
                     lpEventosB2 += curriculoProf.getArtigosEventosB2();
                     lpEventosB3 += curriculoProf.getArtigosEventosB3();
                     lpEventosB4 += curriculoProf.getArtigosEventosB4();
+                    lpEventosB5 += curriculoProf.getArtigosEventosB5();
                     lpEventosC += curriculoProf.getArtigosEventosC();
                     lpEventosNC += curriculoProf.getArtigosEventosNC();
                     lpParticipacaoDoutorado += curriculoProf.getParticipacoesBancasDoutorado();
@@ -191,6 +196,7 @@ public class Controlador {
                 dadosLinhaPesquisa.append("\t").append(lpRevistasB2);
                 dadosLinhaPesquisa.append("\t").append(lpRevistasB3);
                 dadosLinhaPesquisa.append("\t").append(lpRevistasB4);
+                dadosLinhaPesquisa.append("\t").append(lpRevistasB5);
                 dadosLinhaPesquisa.append("\t").append(lpRevistasC);
                 dadosLinhaPesquisa.append("\t").append(lpRevistasNC);
                 dadosLinhaPesquisa.append("\t").append(lpEventosA1);
@@ -199,6 +205,7 @@ public class Controlador {
                 dadosLinhaPesquisa.append("\t").append(lpEventosB2);
                 dadosLinhaPesquisa.append("\t").append(lpEventosB3);
                 dadosLinhaPesquisa.append("\t").append(lpEventosB4);
+                dadosLinhaPesquisa.append("\t").append(lpEventosB5);
                 dadosLinhaPesquisa.append("\t").append(lpEventosC);
                 dadosLinhaPesquisa.append("\t").append(lpEventosNC);
                 dadosLinhaPesquisa.append("\t").append(lpParticipacaoDoutorado);
@@ -218,6 +225,7 @@ public class Controlador {
                 pRevistasB2 += lpRevistasB2;
                 pRevistasB3 += lpRevistasB3;
                 pRevistasB4 += lpRevistasB4;
+                pRevistasB5 += lpRevistasB5;
                 pRevistasC += lpRevistasC;
                 pRevistasNC += lpRevistasNC;
                 pEventosA1 += lpEventosA1;
@@ -226,6 +234,7 @@ public class Controlador {
                 pEventosB2 += lpEventosB2;
                 pEventosB3 += lpEventosB3;
                 pEventosB4 += lpEventosB4;
+                pEventosB5 += lpEventosB5;
                 pEventosC += lpEventosC;
                 pEventosNC += lpEventosNC;
                 pParticipacaoDoutorado += lpParticipacaoDoutorado;
@@ -246,6 +255,7 @@ public class Controlador {
             dadosPrograma.append("\t").append(pRevistasB2);
             dadosPrograma.append("\t").append(pRevistasB3);
             dadosPrograma.append("\t").append(pRevistasB4);
+            dadosPrograma.append("\t").append(pRevistasB5);
             dadosPrograma.append("\t").append(pRevistasC);
             dadosPrograma.append("\t").append(pRevistasNC);
             dadosPrograma.append("\t").append(pEventosA1);
@@ -254,6 +264,7 @@ public class Controlador {
             dadosPrograma.append("\t").append(pEventosB2);
             dadosPrograma.append("\t").append(pEventosB3);
             dadosPrograma.append("\t").append(pEventosB4);
+            dadosPrograma.append("\t").append(pEventosB5);
             dadosPrograma.append("\t").append(pEventosC);
             dadosPrograma.append("\t").append(pEventosNC);
             dadosPrograma.append("\t").append(pParticipacaoDoutorado);

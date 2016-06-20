@@ -11,6 +11,7 @@ class Curriculo {
     private int artigosRevistasB2;
     private int artigosRevistasB3;
     private int artigosRevistasB4;
+    private int artigosRevistasB5;
     private int artigosRevistasC;
     private int artigosRevistasNC;
     private int artigosEventosA1;
@@ -19,6 +20,7 @@ class Curriculo {
     private int artigosEventosB2;
     private int artigosEventosB3;
     private int artigosEventosB4;
+    private int artigosEventosB5;
     private int artigosEventosC;
     private int artigosEventosNC;
     private int participacoesBancasDoutorado;
@@ -31,13 +33,14 @@ class Curriculo {
     private int orientacoesMestradoEmAndamento;
     private int orientacoesGraduacaoEmAndamento;
 
-    public Curriculo(int artigosRevistasA1, int artigosRevistasA2, int artigosRevistasB1, int artigosRevistasB2, int artigosRevistasB3, int artigosRevistasB4, int artigosRevistasC, int artigosRevistasNC, int artigosEventosA1, int artigosEventosA2, int artigosEventosB1, int artigosEventosB2, int artigosEventosB3, int artigosEventosB4, int artigosEventosC, int artigosEventosNC, int participacoesBancasDoutorado, int participacoesBancasMestrado, int participacoesBancasGraduacao, int orientacoesDoutoradoConcluidas, int orientacoesMestradoConcluidas, int orientacoesGraduacaoConcluidas, int orientacoesDoutoradoEmAndamento, int orientacoesMestradoEmAndamento, int orientacoesGraduacaoEmAndamento) {
+    public Curriculo(int artigosRevistasA1, int artigosRevistasA2, int artigosRevistasB1, int artigosRevistasB2, int artigosRevistasB3, int artigosRevistasB4, int artigosRevistasB5, int artigosRevistasC, int artigosRevistasNC, int artigosEventosA1, int artigosEventosA2, int artigosEventosB1, int artigosEventosB2, int artigosEventosB3, int artigosEventosB4,int artigosEventosB5, int artigosEventosC, int artigosEventosNC, int participacoesBancasDoutorado, int participacoesBancasMestrado, int participacoesBancasGraduacao, int orientacoesDoutoradoConcluidas, int orientacoesMestradoConcluidas, int orientacoesGraduacaoConcluidas, int orientacoesDoutoradoEmAndamento, int orientacoesMestradoEmAndamento, int orientacoesGraduacaoEmAndamento) {
         this.artigosRevistasA1 = artigosRevistasA1;
         this.artigosRevistasA2 = artigosRevistasA2;
         this.artigosRevistasB1 = artigosRevistasB1;
         this.artigosRevistasB2 = artigosRevistasB2;
         this.artigosRevistasB3 = artigosRevistasB3;
         this.artigosRevistasB4 = artigosRevistasB4;
+        this.artigosRevistasB5 = artigosRevistasB5;
         this.artigosRevistasC = artigosRevistasC;
         this.artigosRevistasNC = artigosRevistasNC;
         this.artigosEventosA1 = artigosEventosA1;
@@ -46,6 +49,7 @@ class Curriculo {
         this.artigosEventosB2 = artigosEventosB2;
         this.artigosEventosB3 = artigosEventosB3;
         this.artigosEventosB4 = artigosEventosB4;
+        this.artigosEventosB5 = artigosEventosB5;
         this.artigosEventosC = artigosEventosC;
         this.artigosEventosNC = artigosEventosNC;
         this.participacoesBancasDoutorado = participacoesBancasDoutorado;
@@ -84,6 +88,9 @@ class Curriculo {
                 case "B4":
                     artigosRevistasB4++;
                     break;
+                case "B5":
+                    artigosRevistasB5++;
+                    break;
                 case "C":
                     artigosRevistasC++;
                     break;
@@ -113,6 +120,9 @@ class Curriculo {
                 case "B4":
                     artigosEventosB4++;
                     break;
+                case "B5":
+                    artigosEventosB5++;
+                    break;
                 case "C":
                     artigosEventosC++;
                     break;
@@ -141,6 +151,7 @@ class Curriculo {
         System.out.println("Revista B2: " + artigosRevistasB2);
         System.out.println("Revista B3: " + artigosRevistasB3);
         System.out.println("Revista B4: " + artigosRevistasB4);
+        System.out.println("Revista B5: " + artigosRevistasB5);
         System.out.println("Revista C: " + artigosRevistasC);
         System.out.println("Revista NC: " + artigosRevistasNC);
         System.out.println("Evento A1: " + artigosEventosA1);
@@ -149,6 +160,7 @@ class Curriculo {
         System.out.println("Evento B2: " + artigosEventosB2);
         System.out.println("Evento B3: " + artigosEventosB3);
         System.out.println("Evento B4: " + artigosEventosB4);
+        System.out.println("Evento B5: " + artigosEventosB5);
         System.out.println("Evento C: " + artigosEventosC);
         System.out.println("Evento NC: " + artigosEventosNC);
     }
