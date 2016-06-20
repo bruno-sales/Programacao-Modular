@@ -10,12 +10,7 @@ import com.unirio.modelo.LeitorCurriculo;
 import com.unirio.modelo.LeitorLinhaPesquisa;
 import com.unirio.modelo.LeitorProfessor;
 import com.unirio.modelo.LeitorPrograma;
-import com.unirio.modelo.Professor;
 import com.unirio.modelo.Programa;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
