@@ -5,9 +5,12 @@
  */
 package com.unirio.baseTests;
 
+import com.unirio.modelo.Curriculo;
+import com.unirio.modelo.LeitorCurriculo;
 import com.unirio.modelo.LeitorLinhaPesquisa;
 import com.unirio.modelo.LeitorProfessor;
 import com.unirio.modelo.LeitorPrograma;
+import com.unirio.modelo.Professor;
 import com.unirio.modelo.Programa;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,9 +60,17 @@ public class TestesBase {
     }
     
     @Test
-    public void TestQauntidadeProfessoresLinhaPesquisa(){
+    public void TestQuantidadeProfessoresLinhaPesquisa(){
         
         assertEquals(7, (LeitorProfessor.recuperaDadosProfessor("Sistemas de Apoio a Negócios")).size());
+    
+    }
+    
+    @Test
+    public void TestQuantidadeArtigosEmEvento(){
+        
+        Curriculo curriculoKate = LeitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
+        assertEquals(6, (curriculoKate.getArtigosRevistasA1() + curriculoKate.getArtigosRevistasA2() + curriculoKate.getArtigosRevistasB1() + curriculoKate.getArtigosRevistasB2() + + curriculoKate.getArtigosRevistasB3() + curriculoKate.getArtigosRevistasB4() + curriculoKate.getArtigosRevistasB5() + + curriculoKate.getArtigosRevistasC() + + curriculoKate.getArtigosRevistasNC()));
     
     }
  }
