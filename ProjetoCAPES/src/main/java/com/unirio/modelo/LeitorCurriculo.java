@@ -15,7 +15,8 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * Classe responsável por popular dados do currículo do professor e retornar objeto currículo preenchido.
+ * Classe responsável por popular dados do currículo do professor e retornar
+ * objeto currículo preenchido.
  */
 public class LeitorCurriculo {
 
@@ -34,14 +35,12 @@ public class LeitorCurriculo {
     private static final String TITULODOPERIODICOOUREVISTA = "TITULO-DO-PERIODICO-OU-REVISTA";
     private static final String ANODOARTIGO = "ANO-DO-ARTIGO";
     private static final String ARTIGOPUBLICADO = "ARTIGO-PUBLICADO";
-    
-    private static final String TRABALHOEMEVENTOS = "TRABALHO-EM-EVENTOS";
-        private static final String ANODOTRABALHO = "ANO-DO-TRABALHO";
 
+    private static final String TRABALHOEMEVENTOS = "TRABALHO-EM-EVENTOS";
+    private static final String ANODOTRABALHO = "ANO-DO-TRABALHO";
 
     private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
 
-    
     public static Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
 
         Curriculo curriculo = new Curriculo();
@@ -72,33 +71,36 @@ public class LeitorCurriculo {
 
         List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
         for (Element artigo : artigos) {
-            
+
             NodeList dadosBasicos = artigo.getElementsByTagName("DADOS-BASICOS-DO-ARTIGO");
             NodeList detalhemento = artigo.getElementsByTagName("DETALHAMENTO-DO-ARTIGO");
-                     
+
             Element elementDadosBasicos = (Element) dadosBasicos.item(0);
             Element elementDetalhemento = (Element) detalhemento.item(0);
-            
+
             String stringAnoDoArtigo = elementDadosBasicos.getAttribute(ANODOARTIGO);
             String tituloArtigoRevista = elementDetalhemento.getAttribute(TITULODOPERIODICOOUREVISTA);
-            
-            if(!stringAnoDoArtigo.isEmpty()){
-                
+
+            if (!stringAnoDoArtigo.isEmpty()) {
+
                 int anoDoArtigo = Integer.parseInt(stringAnoDoArtigo);
-                if((anoDoArtigo>=anoInicio)&&(anoDoArtigo<=anoFim)){
+                if ((anoDoArtigo >= anoInicio) && (anoDoArtigo <= anoFim)) {
 
                     List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
                     int countMatchesRevista = 0;
 
                     for (Element qualis : qualisList) {
                         String padrao = qualis.getAttribute("regex");
-                        if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")) {
+                        String tipo = qualis.getAttribute("type");
+                        
+                        if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")
+                                && tipo.toLowerCase().equals("periódico")) {
                             countMatchesRevista++;
 
                             String classe = qualis.getAttribute("class");
-                            String tipo = qualis.getAttribute("type");
 
                             curriculo.qualificaArtigos(tipo, classe);
+                            break;
                         }
                     }
                     if (countMatchesRevista == 0) {
@@ -107,7 +109,7 @@ public class LeitorCurriculo {
 
                 }
             }
-            
+
         }
 
         List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", TRABALHOEMEVENTOS);
@@ -115,36 +117,39 @@ public class LeitorCurriculo {
 
             NodeList dadosBasicos = evento.getElementsByTagName("DADOS-BASICOS-DO-TRABALHO");
             NodeList detalhemento = evento.getElementsByTagName("DETALHAMENTO-DO-TRABALHO");
-                     
+
             Element elementDadosBasicos = (Element) dadosBasicos.item(0);
             Element elementDetalhemento = (Element) detalhemento.item(0);
-                        
+
             String stringAnoDoTrabalho = elementDadosBasicos.getAttribute(ANODOTRABALHO);
             String tituloArtigoEventos = elementDetalhemento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
-            
-            if(!stringAnoDoTrabalho.isEmpty()){
-                
+
+            if (!stringAnoDoTrabalho.isEmpty()) {
+
                 int anoDoTrabalho = Integer.parseInt(stringAnoDoTrabalho);
-                if((anoDoTrabalho>=anoInicio)&&(anoDoTrabalho<=anoFim)){
+                if ((anoDoTrabalho >= anoInicio) && (anoDoTrabalho <= anoFim)) {
                     List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
                     int countMatchesEventos = 0;
 
                     for (Element qualis : qualisList) {
                         String padrao = qualis.getAttribute("regex");
+                        String tipo = qualis.getAttribute("type");
 
-                        if (tituloArtigoEventos.matches("(?i:.*"+ padrao + ".*)")) {
+                        if (tituloArtigoEventos.matches("(?i:.*" + padrao + ".*)")
+                                && tipo.toLowerCase().equals("conferência")) {
+
                             countMatchesEventos++;
                             String classe = qualis.getAttribute("class");
-                            String tipo = qualis.getAttribute("type");
 
                             curriculo.qualificaArtigos(tipo, classe);
+                            break;
                         }
                     }
                     if (countMatchesEventos == 0) {
                         System.out.println("Artigo em evento não encontrado: " + tituloArtigoEventos);
                     }
                 }
-                
+
             }
         }
 
