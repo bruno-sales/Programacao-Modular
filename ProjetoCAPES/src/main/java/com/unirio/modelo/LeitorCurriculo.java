@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.unirio.modelo;
 
-import com.unirio.acessorios.LeitorXml;
 import com.unirio.acessorios.RecuperaXml;
-import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -22,7 +14,7 @@ public class LeitorCurriculo {
 
     private static final String ORIENTACOESCONCLUIDASPARAMESTRADO = "ORIENTACOES-CONCLUIDAS-PARA-MESTRADO";
     private static final String ORIENTACOESCONCLUIDASPARADOUTORADO = "ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO";
-    private static final String ORIENTACOESCONCLUIDASPARAGRADUACAO = "OUTRAS-ORIENTACOES-CONCLUIDAS";
+    private static final String ORIENTACOESCONCLUIDASPARAGRADUACAO = "DADOS-BASICOS-DE-OUTRAS-ORIENTACOES-CONCLUIDAS";
 
     private static final String ORIENTACAOEMANDAMENTODEMESTRADO = "ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO";
     private static final String ORIENTACAOEMANDAMENTODEDOUTORADO = "ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO";
@@ -39,7 +31,17 @@ public class LeitorCurriculo {
     private static final String TRABALHOEMEVENTOS = "TRABALHO-EM-EVENTOS";
     private static final String ANODOTRABALHO = "ANO-DO-TRABALHO";
 
-    private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
+    private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";    
+      
+    private static final String TRABALHODECONCLUSAODECURSOGRADUACAO = "TRABALHO_DE_CONCLUSAO_DE_CURSO_GRADUACAO"; 
+    private static final String NATUREZA = "NATUREZA";     
+    private static final String DADOSBASICOSDOARTIGO = "DADOS-BASICOS-DO-ARTIGO";    
+    private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";    
+    private static final String DADOSBASICOSDOTRABALHO = "DADOS-BASICOS-DO-TRABALHO";    
+    private static final String DETALHAMENTODOTRABALHO = "DETALHAMENTO-DO-TRABALHO";
+    
+    private static final String ORIENTACAOEMANDAMENTODEGRADUACAO = "ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO";
+    
 
     public static Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
 
@@ -55,15 +57,27 @@ public class LeitorCurriculo {
 
         List<Element> orientacoesMestradoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEMESTRADO);
         List<Element> orientacoesDoutoradoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEDOUTORADO);
-        List<Element> orientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", OUTRASORIENTACOESEMANDAMENTO);
+        List<Element> outrasOrientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", OUTRASORIENTACOESEMANDAMENTO);
+        List<Element> orientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEGRADUACAO);
 
         curriculo.setOrientacoesMestradoEmAndamento(orientacoesMestradoEmAndamentoItens.size());
         curriculo.setOrientacoesDoutoradoEmAndamento(orientacoesDoutoradoEmAndamentoItens.size());
-        curriculo.setOrientacoesGraduacaoEmAndamento(orientacoesGraduacaoEmAndamentoItens.size());
+        curriculo.setOrientacoesGraduacaoEmAndamento(orientacoesGraduacaoEmAndamentoItens.size()
+        + outrasOrientacoesGraduacaoEmAndamentoItens.size());
 
         curriculo.setOrientacoesMestradoConcluidas(orientacoesMestradoConcluidasItens.size());
         curriculo.setOrientacoesDoutoradoConcluidas(orientacoesDoutoradoConcluidasItens.size());
-        curriculo.setOrientacoesGraduacaoConcluidas(orientacoesGraduacaoConcluidasItens.size());
+
+        int contadorConcluidaGraducao = 0;
+
+        for (Element orientacaoGraducaoConcluida : orientacoesGraduacaoConcluidasItens) {
+            String natureza = orientacaoGraducaoConcluida.getAttribute(NATUREZA);
+
+            if (natureza.toLowerCase().equals(TRABALHODECONCLUSAODECURSOGRADUACAO.toLowerCase())) {
+                contadorConcluidaGraducao++;
+            }
+        }
+        curriculo.setOrientacoesGraduacaoConcluidas(contadorConcluidaGraducao);
 
         curriculo.setParticipacoesBancasMestrado(participacaoMestradoItens.size());
         curriculo.setParticipacoesBancasDoutorado(participacaoDoutoradoItens.size());
@@ -72,8 +86,8 @@ public class LeitorCurriculo {
         List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
         for (Element artigo : artigos) {
 
-            NodeList dadosBasicos = artigo.getElementsByTagName("DADOS-BASICOS-DO-ARTIGO");
-            NodeList detalhemento = artigo.getElementsByTagName("DETALHAMENTO-DO-ARTIGO");
+            NodeList dadosBasicos = artigo.getElementsByTagName(DADOSBASICOSDOARTIGO);
+            NodeList detalhemento = artigo.getElementsByTagName(DETALHAMENTODOARTIGO);
 
             Element elementDadosBasicos = (Element) dadosBasicos.item(0);
             Element elementDetalhemento = (Element) detalhemento.item(0);
@@ -92,7 +106,7 @@ public class LeitorCurriculo {
                     for (Element qualis : qualisList) {
                         String padrao = qualis.getAttribute("regex");
                         String tipo = qualis.getAttribute("type");
-                        
+
                         if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")
                                 && tipo.toLowerCase().equals("periódico")) {
                             countMatchesRevista++;
@@ -115,8 +129,8 @@ public class LeitorCurriculo {
         List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", TRABALHOEMEVENTOS);
         for (Element evento : eventos) {
 
-            NodeList dadosBasicos = evento.getElementsByTagName("DADOS-BASICOS-DO-TRABALHO");
-            NodeList detalhemento = evento.getElementsByTagName("DETALHAMENTO-DO-TRABALHO");
+            NodeList dadosBasicos = evento.getElementsByTagName(DADOSBASICOSDOTRABALHO);
+            NodeList detalhemento = evento.getElementsByTagName(DETALHAMENTODOTRABALHO);
 
             Element elementDadosBasicos = (Element) dadosBasicos.item(0);
             Element elementDetalhemento = (Element) detalhemento.item(0);
@@ -154,19 +168,6 @@ public class LeitorCurriculo {
         }
 
         return curriculo;
-
-        /*                
-
-         List<Element> curriculoElements = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", "root");
-        
-         if (curriculoElements.isEmpty())
-         return curriculo;
-        
-         Element curriculoElement = curriculoElements.get(0);
-        
-         LeitorXml.getElements(curriculoElement, "nome");
-        
-         */
     }
 
 }
