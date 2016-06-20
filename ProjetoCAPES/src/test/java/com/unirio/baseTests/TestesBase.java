@@ -27,23 +27,7 @@ public class TestesBase {
 
     public TestesBase() {
     }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
+    
     @Test
     public void TestQuantidadeLinhasPesquisa() {
  
@@ -67,10 +51,18 @@ public class TestesBase {
     }
     
     @Test
-    public void TestQuantidadeArtigosEmEvento(){
+    public void TestQuantidadeArtigosEmRevista(){
         
         Curriculo curriculoKate = LeitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
         assertEquals(6, (curriculoKate.getArtigosRevistasA1() + curriculoKate.getArtigosRevistasA2() + curriculoKate.getArtigosRevistasB1() + curriculoKate.getArtigosRevistasB2() + + curriculoKate.getArtigosRevistasB3() + curriculoKate.getArtigosRevistasB4() + curriculoKate.getArtigosRevistasB5() + + curriculoKate.getArtigosRevistasC() + + curriculoKate.getArtigosRevistasNC()));
+    
+    }
+    
+    @Test
+    public void TestQuantidadeOrientacaoMestradoConcluidas(){
+        
+        Curriculo curriculoKate = LeitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
+        assertEquals(13, curriculoKate.getOrientacoesMestradoConcluidas());
     
     }
  }
