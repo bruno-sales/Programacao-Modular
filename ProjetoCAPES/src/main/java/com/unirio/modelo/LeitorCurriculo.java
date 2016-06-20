@@ -10,6 +10,7 @@ import com.unirio.acessorios.RecuperaXml;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -72,8 +73,14 @@ public class LeitorCurriculo {
         List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
         for (Element artigo : artigos) {
             
-            String tituloArtigoRevista = artigo.getAttribute(TITULODOPERIODICOOUREVISTA);
-            String stringAnoDoArtigo = artigo.getAttribute(ANODOARTIGO);
+            NodeList dadosBasicos = artigo.getElementsByTagName("DADOS-BASICOS-DO-ARTIGO");
+            NodeList detalhemento = artigo.getElementsByTagName("DETALHAMENTO-DO-ARTIGO");
+                     
+            Element elementDadosBasicos = (Element) dadosBasicos.item(0);
+            Element elementDetalhemento = (Element) detalhemento.item(0);
+            
+            String stringAnoDoArtigo = elementDadosBasicos.getAttribute(ANODOARTIGO);
+            String tituloArtigoRevista = elementDetalhemento.getAttribute(TITULODOPERIODICOOUREVISTA);
             
             if(!stringAnoDoArtigo.isEmpty()){
                 
@@ -106,9 +113,15 @@ public class LeitorCurriculo {
         List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", TRABALHOEMEVENTOS);
         for (Element evento : eventos) {
 
-            String tituloArtigoEventos = evento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
-            String stringAnoDoTrabalho = evento.getAttribute(ANODOTRABALHO);
-
+            NodeList dadosBasicos = evento.getElementsByTagName("DADOS-BASICOS-DO-TRABALHO");
+            NodeList detalhemento = evento.getElementsByTagName("DETALHAMENTO-DO-TRABALHO");
+                     
+            Element elementDadosBasicos = (Element) dadosBasicos.item(0);
+            Element elementDetalhemento = (Element) detalhemento.item(0);
+                        
+            String stringAnoDoTrabalho = elementDadosBasicos.getAttribute(ANODOTRABALHO);
+            String tituloArtigoEventos = elementDetalhemento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
+            
             if(!stringAnoDoTrabalho.isEmpty()){
                 
                 int anoDoTrabalho = Integer.parseInt(stringAnoDoTrabalho);
