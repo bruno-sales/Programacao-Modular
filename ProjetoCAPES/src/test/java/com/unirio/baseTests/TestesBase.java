@@ -5,6 +5,7 @@
  */
 package com.unirio.baseTests;
 
+import com.unirio.controlador.Controlador;
 import com.unirio.modelo.Curriculo;
 import com.unirio.modelo.LeitorCurriculo;
 import com.unirio.modelo.LeitorLinhaPesquisa;
@@ -25,7 +26,7 @@ public class TestesBase {
     
     @Test
     public void TestQuantidadeLinhasPesquisa() {
- 
+        Controlador.baixaArquivos();
         Programa programaTeste = new Programa("PPGI-UNIRIO");
         assertEquals(3, (LeitorLinhaPesquisa.recuperaDadosLinhaPesquisa(programaTeste)).size());
  
