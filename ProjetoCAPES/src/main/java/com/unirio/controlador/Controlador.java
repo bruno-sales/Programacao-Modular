@@ -66,7 +66,13 @@ public class Controlador {
     */
     static void geraRelatorio(Programa p) throws FileNotFoundException, UnsupportedEncodingException {
 
-        PrintWriter writer = new PrintWriter("relatorio.txt", "UTF-8");        
+        PrintWriter writer = new PrintWriter("relatorio.txt", "UTF-8"); 
+        
+        //Cabecalho
+        writer.println("Nome do Professor\t"
+                + "RevA1\ttRevA2\ttRevB1\ttRevB2\ttRevB3\ttRevB4\ttRevB5\ttRevC\tRevN/C\t"
+                + "EveA1\ttEveA2\ttEveB1\ttEveB2\ttEveB3\ttEveB4\ttEveB5\ttEveC\ttEveN/C\t"
+                + "bancasD\ttbancasM\tbancasG\tOriCoD\tOriCoM\tOriCoG\tOriAnD\tOriAnM\tOriAnG");
 
             int pRevistasA1 = 0;
             int pRevistasA2 = 0;
