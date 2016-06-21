@@ -31,19 +31,21 @@ public class LeitorCurriculo {
     private static final String TRABALHOEMEVENTOS = "TRABALHO-EM-EVENTOS";
     private static final String ANODOTRABALHO = "ANO-DO-TRABALHO";
 
-    private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";    
-      
-    private static final String TRABALHODECONCLUSAODECURSOGRADUACAO = "TRABALHO_DE_CONCLUSAO_DE_CURSO_GRADUACAO"; 
-    private static final String NATUREZA = "NATUREZA";     
-    private static final String DADOSBASICOSDOARTIGO = "DADOS-BASICOS-DO-ARTIGO";    
-    private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";    
-    private static final String DADOSBASICOSDOTRABALHO = "DADOS-BASICOS-DO-TRABALHO";    
-    private static final String DETALHAMENTODOTRABALHO = "DETALHAMENTO-DO-TRABALHO";
-    
-    private static final String ORIENTACAOEMANDAMENTODEGRADUACAO = "ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO";
-    
+    private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
 
-    public static Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
+    private static final String TRABALHODECONCLUSAODECURSOGRADUACAO = "TRABALHO_DE_CONCLUSAO_DE_CURSO_GRADUACAO";
+    private static final String NATUREZA = "NATUREZA";
+    private static final String DADOSBASICOSDOARTIGO = "DADOS-BASICOS-DO-ARTIGO";
+    private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";
+    private static final String DADOSBASICOSDOTRABALHO = "DADOS-BASICOS-DO-TRABALHO";
+    private static final String DETALHAMENTODOTRABALHO = "DETALHAMENTO-DO-TRABALHO";
+
+    private static final String ORIENTACAOEMANDAMENTODEGRADUACAO = "ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO";
+    private static final String ANO = "ANO";
+
+    private static final String DADOSBASICOSDAORIENTACAOEMANDAMENTODEMESTRADO = "DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO";
+
+    public Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
 
         Curriculo curriculo = new Curriculo();
 
@@ -60,10 +62,14 @@ public class LeitorCurriculo {
         List<Element> outrasOrientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", OUTRASORIENTACOESEMANDAMENTO);
         List<Element> orientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEGRADUACAO);
 
-        curriculo.setOrientacoesMestradoEmAndamento(orientacoesMestradoEmAndamentoItens.size());
+        int qtdOrientacoesMestradoAndamento = RecuperaXml.quantidadeElementosNoAno(orientacoesMestradoEmAndamentoItens, DADOSBASICOSDAORIENTACAOEMANDAMENTODEMESTRADO,
+                ANO, anoInicio, anoFim);
+        curriculo.setOrientacoesMestradoEmAndamento(qtdOrientacoesMestradoAndamento);
+        
+        
         curriculo.setOrientacoesDoutoradoEmAndamento(orientacoesDoutoradoEmAndamentoItens.size());
         curriculo.setOrientacoesGraduacaoEmAndamento(orientacoesGraduacaoEmAndamentoItens.size()
-        + outrasOrientacoesGraduacaoEmAndamentoItens.size());
+                + outrasOrientacoesGraduacaoEmAndamentoItens.size());
 
         curriculo.setOrientacoesMestradoConcluidas(orientacoesMestradoConcluidasItens.size());
         curriculo.setOrientacoesDoutoradoConcluidas(orientacoesDoutoradoConcluidasItens.size());

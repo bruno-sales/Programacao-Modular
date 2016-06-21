@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
 
 public class RecuperaXml {
     /* Recupera Elementos de um arquivo associados a tag tagName*/
+
     public static List<Element> getElementoXml(String nomeArquivo, String tagName) {
         List<Element> elementos = new ArrayList<>();
 
@@ -41,5 +42,24 @@ public class RecuperaXml {
         }
 
         return elementos;
+    }
+
+    public static int quantidadeElementosNoAno(List<Element> elements, String tagFilho, String tagAno, int anoInicio, int anoFim) {
+        
+        int contador = 0;
+        
+        for (Element element : elements) {
+            NodeList detalhemento = element.getElementsByTagName(tagFilho);
+            Element elementDadosBasicos = (Element) detalhemento.item(0);
+
+            String stringAno = elementDadosBasicos.getAttribute(tagAno);
+
+            int ano = Integer.parseInt(stringAno);
+
+            if (ano >= anoInicio && ano <= anoFim) {
+                contador++;
+            }
+        }
+        return contador;
     }
 }
