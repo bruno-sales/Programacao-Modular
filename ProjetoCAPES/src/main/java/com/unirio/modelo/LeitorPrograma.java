@@ -16,7 +16,7 @@ import org.w3c.dom.Element;
  */
 public class LeitorPrograma {
 
-    public static Programa recuperaDadosPrograma(String nomePrograma) {
+    public Programa recuperaDadosPrograma(String nomePrograma) {
 
         Programa programaEscolhido = new Programa();
 

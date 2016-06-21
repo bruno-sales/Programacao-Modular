@@ -17,7 +17,7 @@ import org.w3c.dom.Node;
  */
 public class LeitorProfessor {
 
-    public static List<Professor> recuperaDadosProfessor(String linhaPesquisa) {
+    public List<Professor> recuperaDadosProfessor(String linhaPesquisa) {
 
         List<Professor> listaProfessores = new ArrayList();
 

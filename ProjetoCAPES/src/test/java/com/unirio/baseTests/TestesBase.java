@@ -28,36 +28,44 @@ public class TestesBase {
     public void TestQuantidadeLinhasPesquisa() {
         Controlador.baixaArquivos();
         Programa programaTeste = new Programa("PPGI-UNIRIO");
-        assertEquals(3, (LeitorLinhaPesquisa.recuperaDadosLinhaPesquisa(programaTeste)).size());
+        LeitorLinhaPesquisa leitorLinhaPesquisa = new LeitorLinhaPesquisa();
+        
+        assertEquals(3, (leitorLinhaPesquisa.recuperaDadosLinhaPesquisa(programaTeste)).size());
  
     }
 
     @Test
     public void TestNomePrograma(){
-
-        assertEquals("PPGI-UNIRIO", (LeitorPrograma.recuperaDadosPrograma("PPGI-UNIRIO")).getNome());
+        
+        LeitorPrograma leitorPrograma = new LeitorPrograma();
+        
+        assertEquals("PPGI-UNIRIO", (leitorPrograma.recuperaDadosPrograma("PPGI-UNIRIO")).getNome());
 
     }
     
     @Test
     public void TestQuantidadeProfessoresLinhaPesquisa(){
+        LeitorProfessor leitorProfessor = new LeitorProfessor();
         
-        assertEquals(7, (LeitorProfessor.recuperaDadosProfessor("Sistemas de Apoio a Negócios")).size());
+        assertEquals(7, (leitorProfessor.recuperaDadosProfessor("Sistemas de Apoio a Negócios")).size());
     
     }
     
     @Test
     public void TestQuantidadeArtigosEmRevista(){
         
-        Curriculo curriculoKate = LeitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
+        LeitorCurriculo leitorCurriculo = new LeitorCurriculo();
+        
+        Curriculo curriculoKate = leitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
         assertEquals(6, (curriculoKate.getArtigosRevistasA1() + curriculoKate.getArtigosRevistasA2() + curriculoKate.getArtigosRevistasB1() + curriculoKate.getArtigosRevistasB2() + + curriculoKate.getArtigosRevistasB3() + curriculoKate.getArtigosRevistasB4() + curriculoKate.getArtigosRevistasB5() + + curriculoKate.getArtigosRevistasC() + + curriculoKate.getArtigosRevistasNC()));
     
     }
     
     @Test
     public void TestQuantidadeOrientacaoMestradoConcluidas(){
+        LeitorCurriculo leitorCurriculo = new LeitorCurriculo();
         
-        Curriculo curriculoKate = LeitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
+        Curriculo curriculoKate = leitorCurriculo.recuperaDadosCurriculo("0814717344017544", 2000, 2016);
         assertEquals(13, curriculoKate.getOrientacoesMestradoConcluidas());
     
     }

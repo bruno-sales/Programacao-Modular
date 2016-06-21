@@ -17,7 +17,7 @@ import org.w3c.dom.Element;
  */
 public class LeitorLinhaPesquisa {
     
-    public static List<LinhaPesquisa> recuperaDadosLinhaPesquisa(Programa programa) {
+    public List<LinhaPesquisa> recuperaDadosLinhaPesquisa(Programa programa) {
 
         //TO-DO: generalizar para que qualquer programa possa ser acessado. Estrutura do nome.
         List<LinhaPesquisa> listaLinhasPesquisa = new ArrayList();
