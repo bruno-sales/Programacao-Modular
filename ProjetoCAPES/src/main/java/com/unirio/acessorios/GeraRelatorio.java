@@ -18,77 +18,78 @@ import java.io.UnsupportedEncodingException;
  * Classe responsável por montar a estrutura geradora de relatórios
  */
 public class GeraRelatorio {
-    
-    public GeraRelatorio(){
+
+    public GeraRelatorio() {
     }
-    
-    public void criarRelatorio(Programa p) throws FileNotFoundException, UnsupportedEncodingException{
-    
-    PrintWriter writer = new PrintWriter("relatorio.txt", "UTF-8");
+
+    public void criarRelatorio(Programa p) throws FileNotFoundException, UnsupportedEncodingException {
+
+        String nomeArquivo = p.getNome() + ".txt";
+        PrintWriter writer = new PrintWriter(nomeArquivo, "UTF-8");
 
         //Cabecalho
         writer.println("Nome do Professor\t"
-                + "RevA1\ttRevA2\ttRevB1\ttRevB2\ttRevB3\ttRevB4\ttRevB5\ttRevC\tRevN/C\t"
-                + "EveA1\ttEveA2\ttEveB1\ttEveB2\ttEveB3\ttEveB4\ttEveB5\ttEveC\ttEveN/C\t"
-                + "bancasD\ttbancasM\tbancasG\tOriCoD\tOriCoM\tOriCoG\tOriAnD\tOriAnM\tOriAnG");
+                + "RevA1\tRevA2\tRevB1\tRevB2\tRevB3\tRevB4\tRevB5\tRevC\tRevN/C\t"
+                + "EveA1\tEveA2\tEveB1\tEveB2\tEveB3\tEveB4\tEveB5\tEveC\tEveN/C\t"
+                + "bancasD\tbancasM\tbancasG\tOriCoD\tOriCoM\tOriCoG\tOriAnD\tOriAnM\tOriAnG");
 
-        int pRevistasA1 = 0;
-        int pRevistasA2 = 0;
-        int pRevistasB1 = 0;
-        int pRevistasB2 = 0;
-        int pRevistasB3 = 0;
-        int pRevistasB4 = 0;
-        int pRevistasB5 = 0;
-        int pRevistasC = 0;
-        int pRevistasNC = 0;
-        int pEventosA1 = 0;
-        int pEventosA2 = 0;
-        int pEventosB1 = 0;
-        int pEventosB2 = 0;
-        int pEventosB3 = 0;
-        int pEventosB4 = 0;
-        int pEventosB5 = 0;
-        int pEventosC = 0;
-        int pEventosNC = 0;
-        int pParticipacaoDoutorado = 0;
-        int pParticipacaoMestrado = 0;
-        int pParticipacaoGraducao = 0;
-        int pOrientacaoConcluidaDoutorado = 0;
-        int pOrientacaoConcluidaMestrado = 0;
-        int pOrientacaoConcluidaGraducao = 0;
-        int pOrientacaoAndamentoDoutorado = 0;
-        int pOrientacaoAndamentoMestrado = 0;
-        int pOrientacaoAndamentoGraducao = 0;
+        float pRevistasA1 = 0;
+        float pRevistasA2 = 0;
+        float pRevistasB1 = 0;
+        float pRevistasB2 = 0;
+        float pRevistasB3 = 0;
+        float pRevistasB4 = 0;
+        float pRevistasB5 = 0;
+        float pRevistasC = 0;
+        float pRevistasNC = 0;
+        float pEventosA1 = 0;
+        float pEventosA2 = 0;
+        float pEventosB1 = 0;
+        float pEventosB2 = 0;
+        float pEventosB3 = 0;
+        float pEventosB4 = 0;
+        float pEventosB5 = 0;
+        float pEventosC = 0;
+        float pEventosNC = 0;
+        float pParticipacaoDoutorado = 0;
+        float pParticipacaoMestrado = 0;
+        float pParticipacaoGraducao = 0;
+        float pOrientacaoConcluidaDoutorado = 0;
+        float pOrientacaoConcluidaMestrado = 0;
+        float pOrientacaoConcluidaGraducao = 0;
+        float pOrientacaoAndamentoDoutorado = 0;
+        float pOrientacaoAndamentoMestrado = 0;
+        float pOrientacaoAndamentoGraducao = 0;
 
         for (LinhaPesquisa lp : p.getLinhasPesquisa()) {
 
-            int lpRevistasA1 = 0;
-            int lpRevistasA2 = 0;
-            int lpRevistasB1 = 0;
-            int lpRevistasB2 = 0;
-            int lpRevistasB3 = 0;
-            int lpRevistasB4 = 0;
-            int lpRevistasB5 = 0;
-            int lpRevistasC = 0;
-            int lpRevistasNC = 0;
-            int lpEventosA1 = 0;
-            int lpEventosA2 = 0;
-            int lpEventosB1 = 0;
-            int lpEventosB2 = 0;
-            int lpEventosB3 = 0;
-            int lpEventosB4 = 0;
-            int lpEventosB5 = 0;
-            int lpEventosC = 0;
-            int lpEventosNC = 0;
-            int lpParticipacaoDoutorado = 0;
-            int lpParticipacaoMestrado = 0;
-            int lpParticipacaoGraducao = 0;
-            int lpOrientacaoConcluidaDoutorado = 0;
-            int lpOrientacaoConcluidaMestrado = 0;
-            int lpOrientacaoConcluidaGraducao = 0;
-            int lpOrientacaoAndamentoDoutorado = 0;
-            int lpOrientacaoAndamentoMestrado = 0;
-            int lpOrientacaoAndamentoGraducao = 0;
+            float lpRevistasA1 = 0;
+            float lpRevistasA2 = 0;
+            float lpRevistasB1 = 0;
+            float lpRevistasB2 = 0;
+            float lpRevistasB3 = 0;
+            float lpRevistasB4 = 0;
+            float lpRevistasB5 = 0;
+            float lpRevistasC = 0;
+            float lpRevistasNC = 0;
+            float lpEventosA1 = 0;
+            float lpEventosA2 = 0;
+            float lpEventosB1 = 0;
+            float lpEventosB2 = 0;
+            float lpEventosB3 = 0;
+            float lpEventosB4 = 0;
+            float lpEventosB5 = 0;
+            float lpEventosC = 0;
+            float lpEventosNC = 0;
+            float lpParticipacaoDoutorado = 0;
+            float lpParticipacaoMestrado = 0;
+            float lpParticipacaoGraducao = 0;
+            float lpOrientacaoConcluidaDoutorado = 0;
+            float lpOrientacaoConcluidaMestrado = 0;
+            float lpOrientacaoConcluidaGraducao = 0;
+            float lpOrientacaoAndamentoDoutorado = 0;
+            float lpOrientacaoAndamentoMestrado = 0;
+            float lpOrientacaoAndamentoGraducao = 0;
 
             for (Professor prof : lp.getProfessores()) {
                 Curriculo curriculoProf = prof.getCurriculo();
@@ -153,99 +154,101 @@ public class GeraRelatorio {
                 lpOrientacaoAndamentoGraducao += curriculoProf.getOrientacoesGraduacaoEmAndamento();
             }
             StringBuilder dadosLinhaPesquisa = new StringBuilder();
+            int numeroProfessores = lp.getProfessores().size();
+            
             dadosLinhaPesquisa.append("Total da Linha de pesquisa ").append(lp.getNome());
-            dadosLinhaPesquisa.append("\t").append(lpRevistasA1);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasA2);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasB1);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasB2);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasB3);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasB4);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasB5);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasC);
-            dadosLinhaPesquisa.append("\t").append(lpRevistasNC);
-            dadosLinhaPesquisa.append("\t").append(lpEventosA1);
-            dadosLinhaPesquisa.append("\t").append(lpEventosA2);
-            dadosLinhaPesquisa.append("\t").append(lpEventosB1);
-            dadosLinhaPesquisa.append("\t").append(lpEventosB2);
-            dadosLinhaPesquisa.append("\t").append(lpEventosB3);
-            dadosLinhaPesquisa.append("\t").append(lpEventosB4);
-            dadosLinhaPesquisa.append("\t").append(lpEventosB5);
-            dadosLinhaPesquisa.append("\t").append(lpEventosC);
-            dadosLinhaPesquisa.append("\t").append(lpEventosNC);
-            dadosLinhaPesquisa.append("\t").append(lpParticipacaoDoutorado);
-            dadosLinhaPesquisa.append("\t").append(lpParticipacaoMestrado);
-            dadosLinhaPesquisa.append("\t").append(lpParticipacaoGraducao);
-            dadosLinhaPesquisa.append("\t").append(lpOrientacaoConcluidaDoutorado);
-            dadosLinhaPesquisa.append("\t").append(lpOrientacaoConcluidaMestrado);
-            dadosLinhaPesquisa.append("\t").append(lpOrientacaoConcluidaGraducao);
-            dadosLinhaPesquisa.append("\t").append(lpOrientacaoAndamentoDoutorado);
-            dadosLinhaPesquisa.append("\t").append(lpOrientacaoAndamentoMestrado);
-            dadosLinhaPesquisa.append("\t").append(lpOrientacaoAndamentoGraducao);
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasA1 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasA2 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasB1 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasB2 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasB3 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasB4 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasB5 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasC / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpRevistasNC / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosA1 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosA2 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosB1 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosB2 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosB3 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosB4 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosB5 / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosC / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpEventosNC / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpParticipacaoDoutorado / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpParticipacaoMestrado / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpParticipacaoGraducao / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpOrientacaoConcluidaDoutorado / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpOrientacaoConcluidaMestrado / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpOrientacaoConcluidaGraducao / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpOrientacaoAndamentoDoutorado / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpOrientacaoAndamentoMestrado / numeroProfessores));
+            dadosLinhaPesquisa.append("\t").append(String.format("%.1f", lpOrientacaoAndamentoGraducao / numeroProfessores));
             writer.println(dadosLinhaPesquisa); /////Escrever no txt
 
-            pRevistasA1 += lpRevistasA1;
-            pRevistasA2 += lpRevistasA2;
-            pRevistasB1 += lpRevistasB1;
-            pRevistasB2 += lpRevistasB2;
-            pRevistasB3 += lpRevistasB3;
-            pRevistasB4 += lpRevistasB4;
-            pRevistasB5 += lpRevistasB5;
-            pRevistasC += lpRevistasC;
-            pRevistasNC += lpRevistasNC;
-            pEventosA1 += lpEventosA1;
-            pEventosA2 += lpEventosA2;
-            pEventosB1 += lpEventosB1;
-            pEventosB2 += lpEventosB2;
-            pEventosB3 += lpEventosB3;
-            pEventosB4 += lpEventosB4;
-            pEventosB5 += lpEventosB5;
-            pEventosC += lpEventosC;
-            pEventosNC += lpEventosNC;
-            pParticipacaoDoutorado += lpParticipacaoDoutorado;
-            pParticipacaoMestrado += lpParticipacaoMestrado;
-            pParticipacaoGraducao += lpParticipacaoGraducao;
-            pOrientacaoConcluidaDoutorado += lpOrientacaoConcluidaDoutorado;
-            pOrientacaoConcluidaMestrado += lpOrientacaoConcluidaMestrado;
-            pOrientacaoConcluidaGraducao += lpOrientacaoConcluidaGraducao;
-            pOrientacaoAndamentoDoutorado += lpOrientacaoAndamentoDoutorado;
-            pOrientacaoAndamentoMestrado += lpOrientacaoAndamentoMestrado;
-            pOrientacaoAndamentoGraducao += lpOrientacaoAndamentoGraducao;
+            pRevistasA1 += lpRevistasA1 / numeroProfessores;
+            pRevistasA2 += lpRevistasA2 / numeroProfessores;
+            pRevistasB1 += lpRevistasB1 / numeroProfessores;
+            pRevistasB2 += lpRevistasB2 / numeroProfessores;
+            pRevistasB3 += lpRevistasB3 / numeroProfessores;
+            pRevistasB4 += lpRevistasB4 / numeroProfessores;
+            pRevistasB5 += lpRevistasB5 / numeroProfessores;
+            pRevistasC += lpRevistasC / numeroProfessores;
+            pRevistasNC += lpRevistasNC / numeroProfessores;
+            pEventosA1 += lpEventosA1 / numeroProfessores;
+            pEventosA2 += lpEventosA2 / numeroProfessores;
+            pEventosB1 += lpEventosB1 / numeroProfessores;
+            pEventosB2 += lpEventosB2 / numeroProfessores;
+            pEventosB3 += lpEventosB3 / numeroProfessores;
+            pEventosB4 += lpEventosB4 / numeroProfessores;
+            pEventosB5 += lpEventosB5 / numeroProfessores;
+            pEventosC += lpEventosC / numeroProfessores;
+            pEventosNC += lpEventosNC / numeroProfessores;
+            pParticipacaoDoutorado += lpParticipacaoDoutorado / numeroProfessores;
+            pParticipacaoMestrado += lpParticipacaoMestrado / numeroProfessores;
+            pParticipacaoGraducao += lpParticipacaoGraducao / numeroProfessores;
+            pOrientacaoConcluidaDoutorado += lpOrientacaoConcluidaDoutorado / numeroProfessores;
+            pOrientacaoConcluidaMestrado += lpOrientacaoConcluidaMestrado / numeroProfessores;
+            pOrientacaoConcluidaGraducao += lpOrientacaoConcluidaGraducao / numeroProfessores;
+            pOrientacaoAndamentoDoutorado += lpOrientacaoAndamentoDoutorado / numeroProfessores;
+            pOrientacaoAndamentoMestrado += lpOrientacaoAndamentoMestrado / numeroProfessores;
+            pOrientacaoAndamentoGraducao += lpOrientacaoAndamentoGraducao / numeroProfessores;
         }
         StringBuilder dadosPrograma = new StringBuilder();
+        int numeroLinhasPesquisas = p.getLinhasPesquisa().size();
+        
         dadosPrograma.append("Total do Programa ").append(p.getNome());
-        dadosPrograma.append("\t").append(pRevistasA1);
-        dadosPrograma.append("\t").append(pRevistasA2);
-        dadosPrograma.append("\t").append(pRevistasB1);
-        dadosPrograma.append("\t").append(pRevistasB2);
-        dadosPrograma.append("\t").append(pRevistasB3);
-        dadosPrograma.append("\t").append(pRevistasB4);
-        dadosPrograma.append("\t").append(pRevistasB5);
-        dadosPrograma.append("\t").append(pRevistasC);
-        dadosPrograma.append("\t").append(pRevistasNC);
-        dadosPrograma.append("\t").append(pEventosA1);
-        dadosPrograma.append("\t").append(pEventosA2);
-        dadosPrograma.append("\t").append(pEventosB1);
-        dadosPrograma.append("\t").append(pEventosB2);
-        dadosPrograma.append("\t").append(pEventosB3);
-        dadosPrograma.append("\t").append(pEventosB4);
-        dadosPrograma.append("\t").append(pEventosB5);
-        dadosPrograma.append("\t").append(pEventosC);
-        dadosPrograma.append("\t").append(pEventosNC);
-        dadosPrograma.append("\t").append(pParticipacaoDoutorado);
-        dadosPrograma.append("\t").append(pParticipacaoMestrado);
-        dadosPrograma.append("\t").append(pParticipacaoGraducao);
-        dadosPrograma.append("\t").append(pOrientacaoConcluidaDoutorado);
-        dadosPrograma.append("\t").append(pOrientacaoConcluidaMestrado);
-        dadosPrograma.append("\t").append(pOrientacaoConcluidaGraducao);
-        dadosPrograma.append("\t").append(pOrientacaoAndamentoDoutorado);
-        dadosPrograma.append("\t").append(pOrientacaoAndamentoMestrado);
-        dadosPrograma.append("\t").append(pOrientacaoAndamentoGraducao);
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasA1 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasA2 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasB1 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasB2 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasB3 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasB4 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasB5 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasC / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pRevistasNC / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosA1 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosA2 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosB1 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosB2 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosB3 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosB4 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosB5 / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosC / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pEventosNC / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pParticipacaoDoutorado / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pParticipacaoMestrado / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pParticipacaoGraducao / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pOrientacaoConcluidaDoutorado / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pOrientacaoConcluidaMestrado / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pOrientacaoConcluidaGraducao / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pOrientacaoAndamentoDoutorado / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pOrientacaoAndamentoMestrado / numeroLinhasPesquisas));
+        dadosPrograma.append("\t").append(String.format("%.1f", pOrientacaoAndamentoGraducao / numeroLinhasPesquisas));
         writer.println(dadosPrograma); /////Escrever no txt
 
         writer.close(); //////Finalizar txt
 
-        
     }
-    
-    
+
 }
