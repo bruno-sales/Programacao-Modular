@@ -68,7 +68,7 @@ public @Data class Curriculo {
     public Curriculo() {
     }
 
-    public void qualificaArtigos(String tipo, String classe) {
+    public void atribuiClassificacao(String tipo, String classe) {
         
         if (tipo.equals("Periódico")) {
             switch (classe) {

@@ -11,7 +11,6 @@ import com.unirio.modelo.LinhaPesquisa;
 import com.unirio.modelo.Professor;
 import com.unirio.modelo.Programa;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 

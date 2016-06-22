@@ -12,6 +12,7 @@ import org.w3c.dom.NodeList;
  */
 public class LeitorCurriculo {
 
+    //Método responsável por atribuir a quantidade de ocorrências a cada atividade dentro do período definido no currículo do professor indicado
     public Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
 
         Curriculo curriculo = new Curriculo();
@@ -34,10 +35,10 @@ public class LeitorCurriculo {
 
         curriculo.setOrientacoesGraduacaoConcluidas(contabilizaOcorrenciasDeNaturezaAtividadePeriodo(Constants.OUTRASORIENTACOESCONCLUIDAS, Constants.DADOSBASICOSDEOUTRASORIENTACOESCONCLUIDAS, Constants.NATUREZA, Constants.TRABALHODECONCLUSAODECURSOGRADUACAO, codProfessor, anoInicio, anoFim));
 
-        //recupera artigos em eventos
+        //atribui quantidade de artigos em eventos ao currículo
         recuperaArtigo(Constants.TRABALHOEMEVENTOS, Constants.DADOSBASICOSDOTRABALHO, Constants.DETALHAMENTODOTRABALHO, Constants.ANODOTRABALHO, Constants.TITULODOSANAISOUPROCEEDINGS, "conferência", codProfessor, anoInicio, anoFim, curriculo, "evento");
 
-        //recupera artigos em revistas
+        //atribui quantide de artigos em revistas ao currículo
         recuperaArtigo(Constants.ARTIGOPUBLICADO, Constants.DADOSBASICOSDOARTIGO, Constants.DETALHAMENTODOARTIGO, Constants.ANODOARTIGO, Constants.TITULODOPERIODICOOUREVISTA, "periódico", codProfessor, anoInicio, anoFim, curriculo, "revista");
 
         return curriculo;
@@ -63,6 +64,7 @@ public class LeitorCurriculo {
     private void recuperaArtigo(String tagTipoArtigo, String dadosBasicosArtigo, String detalhamentoArtigo, String tagAnoArtigo, String tagTituloArtigo, String tipoArtigo, String codProfessor, int anoInicio, int anoFim, Curriculo curriculo, String mensagemArtigo) {
 
         List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", tagTipoArtigo);
+        
         for (Element artigo : artigos) {
 
             NodeList dadosBasicos = artigo.getElementsByTagName(dadosBasicosArtigo);
@@ -79,32 +81,46 @@ public class LeitorCurriculo {
                 int anoDoArtigo = Integer.parseInt(stringAnoDoArtigo);
                 if ((anoDoArtigo >= anoInicio) && (anoDoArtigo <= anoFim)) {
 
-                    List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
-                    int countMatchesRevista = 0;
-
-                    for (Element qualis : qualisList) {
-                        String padrao = qualis.getAttribute("regex");
-                        String tipo = qualis.getAttribute("type");
-
-                        if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")
-                                && tipo.toLowerCase().equals(tipoArtigo)) {
-                            countMatchesRevista++;
-
-                            String classe = qualis.getAttribute("class");
-
-                            curriculo.qualificaArtigos(tipo, classe);
-                            break;
-                        }
-                    }
-                    if (countMatchesRevista == 0) {
-                        System.out.println("Artigo em " + mensagemArtigo + " não encontrado: " + tituloArtigoRevista);
-                    }
+                    qualificaArtigo(tituloArtigoRevista, tipoArtigo, curriculo, mensagemArtigo);
 
                 }
             }
 
         }
 
+    }
+
+    public boolean qualificaArtigo(String tituloArtigoRevista, String tipoArtigo, Curriculo curriculo, String mensagemArtigo) {
+
+        List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
+        int countMatchesRevista = 0;
+
+        for (Element qualis : qualisList) {
+            
+            String padrao = qualis.getAttribute("regex");
+            String tipo = qualis.getAttribute("type");
+
+            if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")
+                    && tipo.toLowerCase().equals(tipoArtigo)) {
+                
+                countMatchesRevista++;
+
+                String classe = qualis.getAttribute("class");
+                
+                //Adiciona atribuições ao contador de tipos de artigo
+                curriculo.atribuiClassificacao(tipo, classe);
+                return true;
+            }
+        }
+
+        if (countMatchesRevista == 0) {
+            
+            System.out.println("Artigo em " + mensagemArtigo + " não encontrado: " + tituloArtigoRevista);
+        
+        }
+        
+        return false;
+        
     }
 
 }

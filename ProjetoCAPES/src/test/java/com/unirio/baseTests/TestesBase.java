@@ -73,4 +73,6 @@ public class TestesBase {
         assertEquals(13, curriculoKate.getOrientacoesMestradoConcluidas());
     
     }
+   
+    
  }
