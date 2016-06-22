@@ -1,105 +1,78 @@
 package com.unirio.modelo;
 
 import com.unirio.acessorios.RecuperaXml;
+import com.unirio.acessorios.Constants;
 import java.util.List;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- *
  * Classe responsável por popular dados do currículo do professor e retornar
  * objeto currículo preenchido.
  */
 public class LeitorCurriculo {
 
-    private static final String ORIENTACOESCONCLUIDASPARAMESTRADO = "ORIENTACOES-CONCLUIDAS-PARA-MESTRADO";
-    private static final String ORIENTACOESCONCLUIDASPARADOUTORADO = "ORIENTACOES-CONCLUIDAS-PARA-DOUTORADO";
-    private static final String ORIENTACOESCONCLUIDASPARAGRADUACAO = "DADOS-BASICOS-DE-OUTRAS-ORIENTACOES-CONCLUIDAS";
-
-    private static final String ORIENTACAOEMANDAMENTODEMESTRADO = "ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO";
-    private static final String ORIENTACAOEMANDAMENTODEDOUTORADO = "ORIENTACAO-EM-ANDAMENTO-DE-DOUTORADO";
-    private static final String OUTRASORIENTACOESEMANDAMENTO = "OUTRAS-ORIENTACOES-EM-ANDAMENTO";
-
-    private static final String PARTICIPACAOEMBANCADEMESTRADO = "PARTICIPACAO-EM-BANCA-DE-MESTRADO";
-    private static final String PARTICIPACAOEMBANCADEDOUTORADO = "PARTICIPACAO-EM-BANCA-DE-DOUTORADO";
-    private static final String PARTICIPACAOEMBANCADEGRADUACAO = "PARTICIPACAO-EM-BANCA-DE-GRADUACAO";
-
-    private static final String TITULODOPERIODICOOUREVISTA = "TITULO-DO-PERIODICO-OU-REVISTA";
-    private static final String ANODOARTIGO = "ANO-DO-ARTIGO";
-    private static final String ARTIGOPUBLICADO = "ARTIGO-PUBLICADO";
-
-    private static final String TRABALHOEMEVENTOS = "TRABALHO-EM-EVENTOS";
-    private static final String ANODOTRABALHO = "ANO-DO-TRABALHO";
-
-    private static final String TITULODOSANAISOUPROCEEDINGS = "TITULO-DOS-ANAIS-OU-PROCEEDINGS";
-
-    private static final String TRABALHODECONCLUSAODECURSOGRADUACAO = "TRABALHO_DE_CONCLUSAO_DE_CURSO_GRADUACAO";
-    private static final String NATUREZA = "NATUREZA";
-    private static final String DADOSBASICOSDOARTIGO = "DADOS-BASICOS-DO-ARTIGO";
-    private static final String DETALHAMENTODOARTIGO = "DETALHAMENTO-DO-ARTIGO";
-    private static final String DADOSBASICOSDOTRABALHO = "DADOS-BASICOS-DO-TRABALHO";
-    private static final String DETALHAMENTODOTRABALHO = "DETALHAMENTO-DO-TRABALHO";
-
-    private static final String ORIENTACAOEMANDAMENTODEGRADUACAO = "ORIENTACAO-EM-ANDAMENTO-DE-GRADUACAO";
-    private static final String ANO = "ANO";
-
-    private static final String DADOSBASICOSDAORIENTACAOEMANDAMENTODEMESTRADO = "DADOS-BASICOS-DA-ORIENTACAO-EM-ANDAMENTO-DE-MESTRADO";
-
     public Curriculo recuperaDadosCurriculo(String codProfessor, int anoInicio, int anoFim) {
 
         Curriculo curriculo = new Curriculo();
 
-        List<Element> orientacoesMestradoConcluidasItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACOESCONCLUIDASPARAMESTRADO);
-        List<Element> orientacoesDoutoradoConcluidasItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACOESCONCLUIDASPARADOUTORADO);
-        List<Element> orientacoesGraduacaoConcluidasItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACOESCONCLUIDASPARAGRADUACAO);
+        curriculo.setOrientacoesMestradoConcluidas(contabilizaOcorrenciasAtividadePeriodo(Constants.ORIENTACOESCONCLUIDASPARAMESTRADO, Constants.DADOSBASICOSDEORIENTACOESCONCLUIDASPARAMESTRADO, codProfessor, anoInicio, anoFim));
 
-        List<Element> participacaoMestradoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", PARTICIPACAOEMBANCADEMESTRADO);
-        List<Element> participacaoDoutoradoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", PARTICIPACAOEMBANCADEDOUTORADO);
-        List<Element> participacaoGraduacaoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", PARTICIPACAOEMBANCADEGRADUACAO);
+        curriculo.setOrientacoesDoutoradoConcluidas(contabilizaOcorrenciasAtividadePeriodo(Constants.ORIENTACOESCONCLUIDASPARADOUTORADO, Constants.DADOSBASICOSDEORIENTACOESCONCLUIDASPARADOUTORADO, codProfessor, anoInicio, anoFim));
 
-        List<Element> orientacoesMestradoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEMESTRADO);
-        List<Element> orientacoesDoutoradoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEDOUTORADO);
-        List<Element> outrasOrientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", OUTRASORIENTACOESEMANDAMENTO);
-        List<Element> orientacoesGraduacaoEmAndamentoItens = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ORIENTACAOEMANDAMENTODEGRADUACAO);
+        curriculo.setParticipacoesBancasMestrado(contabilizaOcorrenciasAtividadePeriodo(Constants.PARTICIPACAOEMBANCADEMESTRADO, Constants.DADOSBASICOSDAPARTICIPACAOEMBANCADEMESTRADO, codProfessor, anoInicio, anoFim));
 
-        int qtdOrientacoesMestradoAndamento = RecuperaXml.quantidadeElementosNoAno(orientacoesMestradoEmAndamentoItens, DADOSBASICOSDAORIENTACAOEMANDAMENTODEMESTRADO,
-                ANO, anoInicio, anoFim);
-        curriculo.setOrientacoesMestradoEmAndamento(qtdOrientacoesMestradoAndamento);
-        
-        
-        curriculo.setOrientacoesDoutoradoEmAndamento(orientacoesDoutoradoEmAndamentoItens.size());
-        curriculo.setOrientacoesGraduacaoEmAndamento(orientacoesGraduacaoEmAndamentoItens.size()
-                + outrasOrientacoesGraduacaoEmAndamentoItens.size());
+        curriculo.setParticipacoesBancasDoutorado(contabilizaOcorrenciasAtividadePeriodo(Constants.PARTICIPACAOEMBANCADEDOUTORADO, Constants.DADOSBASICOSDAPARTICIPACAOEMBANCADEDOUTORADO, codProfessor, anoInicio, anoFim));
 
-        curriculo.setOrientacoesMestradoConcluidas(orientacoesMestradoConcluidasItens.size());
-        curriculo.setOrientacoesDoutoradoConcluidas(orientacoesDoutoradoConcluidasItens.size());
+        curriculo.setParticipacoesBancasGraduacao(contabilizaOcorrenciasAtividadePeriodo(Constants.PARTICIPACAOEMBANCADEGRADUACAO, Constants.DADOSBASICOSDAPARTICIPACAOEMBANCADEGRADUACAO, codProfessor, anoInicio, anoFim));
 
-        int contadorConcluidaGraducao = 0;
+        curriculo.setOrientacoesMestradoEmAndamento(contabilizaOcorrenciasAtividadePeriodo(Constants.ORIENTACAOEMANDAMENTODEMESTRADO, Constants.DADOSBASICOSDAORIENTACAOEMANDAMENTODEMESTRADO, codProfessor, anoInicio, anoFim));
 
-        for (Element orientacaoGraducaoConcluida : orientacoesGraduacaoConcluidasItens) {
-            String natureza = orientacaoGraducaoConcluida.getAttribute(NATUREZA);
+        curriculo.setOrientacoesDoutoradoEmAndamento(contabilizaOcorrenciasAtividadePeriodo(Constants.ORIENTACAOEMANDAMENTODEDOUTORADO, Constants.DADOSBASICOSDAORIENTACAOEMANDAMENTODEDOUTORADO, codProfessor, anoInicio, anoFim));
 
-            if (natureza.toLowerCase().equals(TRABALHODECONCLUSAODECURSOGRADUACAO.toLowerCase())) {
-                contadorConcluidaGraducao++;
-            }
-        }
-        curriculo.setOrientacoesGraduacaoConcluidas(contadorConcluidaGraducao);
+        curriculo.setOrientacoesGraduacaoEmAndamento(contabilizaOcorrenciasAtividadePeriodo(Constants.ORIENTACAOEMANDAMENTODEGRADUACAO, Constants.DADOSBASICOSDAORIENTACAOEMANDAMENTODEGRADUACAO, codProfessor, anoInicio, anoFim));
 
-        curriculo.setParticipacoesBancasMestrado(participacaoMestradoItens.size());
-        curriculo.setParticipacoesBancasDoutorado(participacaoDoutoradoItens.size());
-        curriculo.setParticipacoesBancasGraduacao(participacaoGraduacaoItens.size());
+        curriculo.setOrientacoesGraduacaoConcluidas(contabilizaOcorrenciasDeNaturezaAtividadePeriodo(Constants.OUTRASORIENTACOESCONCLUIDAS, Constants.DADOSBASICOSDEOUTRASORIENTACOESCONCLUIDAS, Constants.NATUREZA, Constants.TRABALHODECONCLUSAODECURSOGRADUACAO, codProfessor, anoInicio, anoFim));
 
-        List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", ARTIGOPUBLICADO);
+        //recupera artigos em eventos
+        recuperaArtigo(Constants.TRABALHOEMEVENTOS, Constants.DADOSBASICOSDOTRABALHO, Constants.DETALHAMENTODOTRABALHO, Constants.ANODOTRABALHO, Constants.TITULODOSANAISOUPROCEEDINGS, "conferência", codProfessor, anoInicio, anoFim, curriculo, "evento");
+
+        //recupera artigos em revistas
+        recuperaArtigo(Constants.ARTIGOPUBLICADO, Constants.DADOSBASICOSDOARTIGO, Constants.DETALHAMENTODOARTIGO, Constants.ANODOARTIGO, Constants.TITULODOPERIODICOOUREVISTA, "periódico", codProfessor, anoInicio, anoFim, curriculo, "revista");
+
+        return curriculo;
+    }
+
+    //Método responsável por contabilizar as atividades de uma dada tag que ocorreram dentro do período especificado
+    public int contabilizaOcorrenciasAtividadePeriodo(String tagPai, String tagFilha, String codProfessor, int anoInicio, int anoFim) {
+
+        List<Element> itensTotaisDaAtividade = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", tagPai);
+        return RecuperaXml.quantidadeElementosNoPeriodo(itensTotaisDaAtividade, tagFilha, Constants.ANO, anoInicio, anoFim);
+
+    }
+
+    //Método responsável por contabilizar as atividades de uma dada tag que ocorreram dentro do período especificado
+    public int contabilizaOcorrenciasDeNaturezaAtividadePeriodo(String tagPai, String tagFilha, String tagNatureza, String valorNatureza, String codProfessor, int anoInicio, int anoFim) {
+
+        List<Element> itensTotaisDaAtividade = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", tagPai);
+        return RecuperaXml.quantidadeElementosNaturezaNoPeriodo(itensTotaisDaAtividade, tagFilha, Constants.ANO, tagNatureza, valorNatureza, anoInicio, anoFim);
+
+    }
+
+    //Método responsável por recuperar artigos publicados em revistas datadas do período especificado via parâmetros anoInicio, anoFim
+    private void recuperaArtigo(String tagTipoArtigo, String dadosBasicosArtigo, String detalhamentoArtigo, String tagAnoArtigo, String tagTituloArtigo, String tipoArtigo, String codProfessor, int anoInicio, int anoFim, Curriculo curriculo, String mensagemArtigo) {
+
+        List<Element> artigos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", tagTipoArtigo);
         for (Element artigo : artigos) {
 
-            NodeList dadosBasicos = artigo.getElementsByTagName(DADOSBASICOSDOARTIGO);
-            NodeList detalhemento = artigo.getElementsByTagName(DETALHAMENTODOARTIGO);
+            NodeList dadosBasicos = artigo.getElementsByTagName(dadosBasicosArtigo);
+            NodeList detalhemento = artigo.getElementsByTagName(detalhamentoArtigo);
 
             Element elementDadosBasicos = (Element) dadosBasicos.item(0);
             Element elementDetalhemento = (Element) detalhemento.item(0);
 
-            String stringAnoDoArtigo = elementDadosBasicos.getAttribute(ANODOARTIGO);
-            String tituloArtigoRevista = elementDetalhemento.getAttribute(TITULODOPERIODICOOUREVISTA);
+            String stringAnoDoArtigo = elementDadosBasicos.getAttribute(tagAnoArtigo);
+            String tituloArtigoRevista = elementDetalhemento.getAttribute(tagTituloArtigo);
 
             if (!stringAnoDoArtigo.isEmpty()) {
 
@@ -114,7 +87,7 @@ public class LeitorCurriculo {
                         String tipo = qualis.getAttribute("type");
 
                         if (tituloArtigoRevista.matches("(?i:.*" + padrao + ".*)")
-                                && tipo.toLowerCase().equals("periódico")) {
+                                && tipo.toLowerCase().equals(tipoArtigo)) {
                             countMatchesRevista++;
 
                             String classe = qualis.getAttribute("class");
@@ -124,7 +97,7 @@ public class LeitorCurriculo {
                         }
                     }
                     if (countMatchesRevista == 0) {
-                        System.out.println("Artigo em revista não encontrado: " + tituloArtigoRevista);
+                        System.out.println("Artigo em " + mensagemArtigo + " não encontrado: " + tituloArtigoRevista);
                     }
 
                 }
@@ -132,48 +105,6 @@ public class LeitorCurriculo {
 
         }
 
-        List<Element> eventos = RecuperaXml.getElementoXml("xmls/" + codProfessor + "curriculo.xml", TRABALHOEMEVENTOS);
-        for (Element evento : eventos) {
-
-            NodeList dadosBasicos = evento.getElementsByTagName(DADOSBASICOSDOTRABALHO);
-            NodeList detalhemento = evento.getElementsByTagName(DETALHAMENTODOTRABALHO);
-
-            Element elementDadosBasicos = (Element) dadosBasicos.item(0);
-            Element elementDetalhemento = (Element) detalhemento.item(0);
-
-            String stringAnoDoTrabalho = elementDadosBasicos.getAttribute(ANODOTRABALHO);
-            String tituloArtigoEventos = elementDetalhemento.getAttribute(TITULODOSANAISOUPROCEEDINGS);
-
-            if (!stringAnoDoTrabalho.isEmpty()) {
-
-                int anoDoTrabalho = Integer.parseInt(stringAnoDoTrabalho);
-                if ((anoDoTrabalho >= anoInicio) && (anoDoTrabalho <= anoFim)) {
-                    List<Element> qualisList = RecuperaXml.getElementoXml("xmls/qualis.xml", "entry");
-                    int countMatchesEventos = 0;
-
-                    for (Element qualis : qualisList) {
-                        String padrao = qualis.getAttribute("regex");
-                        String tipo = qualis.getAttribute("type");
-
-                        if (tituloArtigoEventos.matches("(?i:.*" + padrao + ".*)")
-                                && tipo.toLowerCase().equals("conferência")) {
-
-                            countMatchesEventos++;
-                            String classe = qualis.getAttribute("class");
-
-                            curriculo.qualificaArtigos(tipo, classe);
-                            break;
-                        }
-                    }
-                    if (countMatchesEventos == 0) {
-                        System.out.println("Artigo em evento não encontrado: " + tituloArtigoEventos);
-                    }
-                }
-
-            }
-        }
-
-        return curriculo;
     }
 
 }

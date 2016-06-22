@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Element;
 /**
- *
  * Classe  responsavel por baixar arquivos da web 
  */
 public class Baixador {
@@ -29,7 +28,9 @@ public class Baixador {
      * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void BaixarArquivo(String nomeArquivo, String url) throws MalformedURLException, FileNotFoundException, IOException {
+    
+    //Classe que executa o download do arquivo dados os parâmetros passados
+    public static void efetuarDownloadArquivo(String nomeArquivo, String url) throws MalformedURLException, FileNotFoundException, IOException {
 
         File file = new File(DIRETORIO + File.separator + nomeArquivo);
 
@@ -44,13 +45,13 @@ public class Baixador {
             fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         }
     }
-    
+    //Classe responsável por disparar a solicitação de download do arquivo qualis
      public static void baixarQualis() {
         String url = "https://s3.amazonaws.com/posgraduacao/qualis.xml";
         String nome = "qualis.xml";
 
         try {
-            BaixarArquivo(nome, url);
+            efetuarDownloadArquivo(nome, url);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -58,23 +59,26 @@ public class Baixador {
         }
     }
 
-     
-     public static void baixarPrimeiroArquivo() {
-        String url = "https://s3.amazonaws.com/posgraduacao/programas.xml";
+     //Classe responsável por disparar a solicitação de download do arquivo de programas.xml 
+     public static void baixarProgramasXml() {
+       
+         String url = "https://s3.amazonaws.com/posgraduacao/programas.xml";
         String nome = "programas.xml";
 
         try {
-            BaixarArquivo(nome, url);
+            efetuarDownloadArquivo(nome, url);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
-    public static void baixarSegundoArquivo() {
+     //Classe responsável por disparar a solicitação de download do arquivo contents.xml
+    public static void baixarContentsXml() {
+       
         String nome = "contents.xml";
-        
         List<Element> myElements = RecuperaXml.getElementoXml("xmls/programas.xml", "programa");
 
         for (Element e : myElements) {
@@ -84,21 +88,24 @@ public class Baixador {
             String url = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/contents.xml";
 
             try {
-                BaixarArquivo(nome, url);
+                efetuarDownloadArquivo(nome, url);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
     }
 
-    public static void baixarTerceiroArquivo() {
+    //Classe responsável por disparar a solicitação de download dos arquivos curriculo
+    public static void baixarCurriculosXml() {
 
         //Caminho, tagname
         List<Element> myElements = RecuperaXml.getElementoXml("xmls/programas.xml", "programa");
 
         for (Element e : myElements) {
+           
             String nomePrograma = LeitorXml.getStringAttribute(e, "nome");
 
             //Caminho, tagname
@@ -112,7 +119,7 @@ public class Baixador {
                 String nome = codProfessor + ".zip";
 
                 try {
-                    BaixarArquivo(nome, url);
+                    efetuarDownloadArquivo(nome, url);
                     Unzipper.unzipFile(nome, codProfessor, "xmls");
                     
                 } catch (FileNotFoundException ex) {
@@ -120,6 +127,7 @@ public class Baixador {
                 } catch (IOException ex) {
                     Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            
             }
         }
     }

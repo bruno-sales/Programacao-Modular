@@ -26,7 +26,11 @@ public class TestesBase {
     
     @Test
     public void TestQuantidadeLinhasPesquisa() {
-        Controlador.baixaArquivos();
+        
+        Controlador instanciaController = new Controlador();
+        
+        instanciaController.baixaArquivos();
+        
         Programa programaTeste = new Programa("PPGI-UNIRIO");
         LeitorLinhaPesquisa leitorLinhaPesquisa = new LeitorLinhaPesquisa();
         

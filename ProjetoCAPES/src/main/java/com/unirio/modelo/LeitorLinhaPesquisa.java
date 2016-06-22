@@ -12,14 +12,12 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 /**
- *
  * Classe responsável por popular linhas de pesquisa do programa informado
  */
 public class LeitorLinhaPesquisa {
     
     public List<LinhaPesquisa> recuperaDadosLinhaPesquisa(Programa programa) {
 
-        //TO-DO: generalizar para que qualquer programa possa ser acessado. Estrutura do nome.
         List<LinhaPesquisa> listaLinhasPesquisa = new ArrayList();
 
         List<Element> linhasPesquisa = RecuperaXml.getElementoXml("xmls/contents.xml" , "linha");

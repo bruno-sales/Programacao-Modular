@@ -12,7 +12,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- *
  * Classe responsável por recuperar os dados dos professores pertencentes a linha de pesquisa informada.
  */
 public class LeitorProfessor {

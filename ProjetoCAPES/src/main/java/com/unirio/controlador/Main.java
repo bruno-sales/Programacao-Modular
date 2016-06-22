@@ -11,13 +11,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author labccet
- */
+
 public class Main {
 
     public static void main(String[] args) {
+        
         //Preenche valores de execução default
         String nomePrograma = "PPGI-UNIRIO";
         int anoInicio = 2003;
@@ -38,12 +36,17 @@ public class Main {
             }
         }
         
-        Controlador.baixaArquivos();
+        // Baixa arquivos
+        Controlador instanciaControladora = new Controlador();
         
-        Programa programa = Controlador.carregaDados(nomePrograma, anoInicio, anoFim);
+        instanciaControladora.baixaArquivos();
         
+        //Carrega Dados
+        Programa programa = instanciaControladora.carregaDados(nomePrograma, anoInicio, anoFim);
+        
+        //Gera Relatório
         try {
-            Controlador.geraRelatorio(programa);
+            instanciaControladora.geraRelatorio(programa);
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

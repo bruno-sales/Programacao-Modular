@@ -2,8 +2,10 @@ package com.unirio.modelo;
 
 import lombok.Data;
 
-public @Data
-class Curriculo {
+/**
+ * Classe do modelo para representação de um objeto currículo
+ */
+public @Data class Curriculo {
 
     private int artigosRevistasA1;
     private int artigosRevistasA2;
@@ -133,36 +135,6 @@ class Curriculo {
                     break;
             }
         }
-    }
-
-    public void escrever() {
-        System.out.println("participacoes Bancas Doutorado: " + participacoesBancasDoutorado);
-        System.out.println("participacoes Bancas Mestrado: " + participacoesBancasMestrado);
-        System.out.println("participacoes Bancas Graduacao: " + participacoesBancasGraduacao);
-        System.out.println("orientacoes Doutorado Concluidas: " + orientacoesDoutoradoConcluidas);
-        System.out.println("orientacoes Mestrado Concluidas: " + orientacoesMestradoConcluidas);
-        System.out.println("orientacoes Graduacao Concluidas: " + orientacoesGraduacaoConcluidas);
-        System.out.println("orientacoes Doutorado Em Andamento: " + orientacoesDoutoradoEmAndamento);
-        System.out.println("orientacoes Mestrado Em Andamento: " + orientacoesMestradoEmAndamento);
-        System.out.println("orientacoes Graduacao Em Andamento: " + orientacoesGraduacaoEmAndamento);
-        System.out.println("Revista A1: " + artigosRevistasA1);
-        System.out.println("Revista A2: " + artigosRevistasA2);
-        System.out.println("Revista B1: " + artigosRevistasB1);
-        System.out.println("Revista B2: " + artigosRevistasB2);
-        System.out.println("Revista B3: " + artigosRevistasB3);
-        System.out.println("Revista B4: " + artigosRevistasB4);
-        System.out.println("Revista B5: " + artigosRevistasB5);
-        System.out.println("Revista C: " + artigosRevistasC);
-        System.out.println("Revista NC: " + artigosRevistasNC);
-        System.out.println("Evento A1: " + artigosEventosA1);
-        System.out.println("Evento A2: " + artigosEventosA2);
-        System.out.println("Evento B1: " + artigosEventosB1);
-        System.out.println("Evento B2: " + artigosEventosB2);
-        System.out.println("Evento B3: " + artigosEventosB3);
-        System.out.println("Evento B4: " + artigosEventosB4);
-        System.out.println("Evento B5: " + artigosEventosB5);
-        System.out.println("Evento C: " + artigosEventosC);
-        System.out.println("Evento NC: " + artigosEventosNC);
     }
 
 }

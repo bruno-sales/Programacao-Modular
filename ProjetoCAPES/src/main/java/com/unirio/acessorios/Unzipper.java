@@ -8,7 +8,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- *
  * Classe responsável por descompactar arquivos zip
  */
 public class Unzipper {

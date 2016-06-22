@@ -11,7 +11,6 @@ import java.util.List;
 import org.w3c.dom.Element;
 
 /**
- *
  * Classe responsável por instanciar objetos do tipo Programa recuperados do arquivo programas.xml.
  */
 public class LeitorPrograma {
